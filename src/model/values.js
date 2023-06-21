@@ -1,5 +1,11 @@
 
 
+const TAB_NAMES = {
+    'text': 'Text',
+    'teleprompter': 'Teleprompter',
+    'defaultval': "Text"
+}
+
 const MODES = {
     'timed': "Timed",
     'manual': "Manual",
@@ -30,4 +36,4 @@ const COLORS = {
     'BLACK': {name: '', src: ''}
 };
 
-export {MODES, FONT_SIZE_LIMITS, SCROLL_SPEED_LIMITS, FONTS, COLORS}
+export {TAB_NAMES, MODES, FONT_SIZE_LIMITS, SCROLL_SPEED_LIMITS, FONTS, COLORS}
