@@ -6,6 +6,7 @@ import React from "react";
 
 function ShowcaseComponents(){
     return <>
+        You are now in the ShowcaseComponents page
         {/* add components below */}
     </>
 }
