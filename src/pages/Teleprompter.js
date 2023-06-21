@@ -8,6 +8,8 @@ import TeleprompterPageContent from '../components/TeleprompterPageContent.js';
 import TeleprompterRibbon from '../components/TeleprompterRibbon';
 
 function Teleprompter() {
+
+    //  Add states as necessary
     const [tab, setTab] = useState(TAB_NAMES.defaultval);
     const [text, setText] = useState("");
     const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
@@ -16,7 +18,10 @@ function Teleprompter() {
     const [selectedFont, setSelectedFont] = useState(FONTS.defaultval);
     const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
     const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(COLORS.BLACK);
+    
 
+    
+    //  edit to add functionalities
     return <div className='Teleprompter-Page'>
         http://localhost:3000/teleprompter
         {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
