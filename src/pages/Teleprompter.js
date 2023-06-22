@@ -32,29 +32,27 @@ function Teleprompter() {
                 right={[]}  //insert the array of components
             />
             <Center>
-                <PanelTab tabname={''} onClick={()=>{}}/>
-                <PanelTab tabname={''} onClick={()=>{}}/>
-                <PanelTab tabname={''} onClick={()=>{}}/>
-                
+                <PanelTab
+                    tabname={TAB_NAMES.defaultval /* has the same value as TAB_NAMES.text */}
+                    onClick={()=>{setTab(TAB_NAMES.defaultval)  /* SELECT THE "Text" tab */ }}/> 
+                <PanelTab
+                    tabname={TAB_NAMES.teleprompter}                         
+                    onClick={()=>{setTab(TAB_NAMES.teleprompter) /* SELECT THE "Teleprompter" tab */}}/>
             </Center>
         </TeleprompterRibbon>
 
 
-        {   //  SHOW THIS CONTENT IN THE BODY WHEN THE "TEXT" TAB IS SELECTED
+        {   //  SHOW THIS CONTENT IN THE BODY WHEN THE "Text" TAB IS SELECTED
             tab == TAB_NAMES.text ? <TeleprompterPageContent>
-                TeleprompterPageContent
-                {
-                }
+                Current tab: "{tab}"
             </TeleprompterPageContent> : null
         }
 
 
 
-        {   //  SHOW THIS CONTENT IN THE BODY WHEN THE "TELEPROMPTER" TAB IS SELECTED
+        {   //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
             tab == TAB_NAMES.teleprompter ? <TeleprompterPageContent>
-                TeleprompterPageContent
-                {
-                }
+                Current tab: "{tab}"
             </TeleprompterPageContent> : null
         }
 
