@@ -6,7 +6,7 @@ import './assets/stylesheets/components.css'
 import './assets/stylesheets/theme.css'
 
 //  comment this line below to remove the boders around divs
-import './assets/stylesheets/bounds.css'
+// import './assets/stylesheets/bounds.css'
 
 
 const App = () => {
