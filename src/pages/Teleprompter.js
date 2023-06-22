@@ -30,15 +30,28 @@ function Teleprompter() {
   const [selectedFont, setSelectedFont] = useState(FONTS.defaultval);
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
-  const [selectedFontSize, setSelectedFontSize] = useState(12)
+  const [selectedFontSize, setSelectedFontSize] = useState(12);
   const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
     COLORS.BLACK
   );
+  const [opacity, setOpacity] = useState(1);
 
   /* handles the changes when theres an input in the textarea */
   const handleTextChange = (event) => {
     const { value } = event.target;
     setText(value);
+  };
+
+  const handleOpacityChange = (event) => {
+    const newOpacity = parseFloat(event.target.value);
+    setOpacity(newOpacity);
+    document.documentElement.style.opacity = opacity;
+  };
+
+
+  const handleScrollSpeedChange = (event) => {
+    const newScrollSpeed = parseFloat(event.target.value);
+    setScrollSpeed(newScrollSpeed);
   };
 
   /* depending on the key/mouse pressed it would open/close the sidebar */
@@ -72,14 +85,49 @@ function Teleprompter() {
         }}
       ></TwitterPicker>
       <p>Font Size</p>
-      <input type="number" name="text-size" id="text-size" value={selectedFontSize} onChange={(size) => {setSelectedFontSize(parseInt(size.target.value))}}/>
-
+      <input
+        type="number"
+        name="text-size"
+        id="text-size"
+        value={selectedFontSize}
+        onChange={(size) => {
+          setSelectedFontSize(parseInt(size.target.value));
+        }}
+      />
+      <Divider></Divider>
+      <h3>Background Color</h3>
+      <TwitterPicker
+        color={selectedBackgroundColor}
+        onChange={(color) => {
+            setSelectedBackgroundColor(color.hex);
+        }}
+      ></TwitterPicker>
+      <Divider></Divider>
+      <h3>Window Opacity</h3>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.1"
+        value={opacity}
+        onChange={handleOpacityChange}
+      />
+    <Divider></Divider>
+    <h3>Scroll Speed</h3>
+    <select value={scrollSpeed} id="scroll-speed-input" onChange={handleScrollSpeedChange}>
+        <option value="-2.0" >- 2.0x</option>
+        <option value="-1.5">- 1.5x</option>
+        <option value="1.0">1.0x</option>
+        <option value="1.5">1.5x</option>
+        <option value="2.0">2.0x</option>
+    </select>
+    <p>Selected speed: {scrollSpeed}</p>
     </Box>
   );
 
   //  edit to add functionalities
   return (
-    <div className="Teleprompter-Page">
+    <div className="Teleprompter-Page" >
       http://localhost:3000/teleprompter
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
@@ -120,7 +168,11 @@ function Teleprompter() {
             {/* todo: fixed text area */}
             <br />
             <br />
-            <pre style={{ color: selectedTextColor, fontSize: selectedFontSize }}>{text}</pre>{" "}
+            <pre
+              style={{ color: selectedTextColor, fontSize: selectedFontSize, backgroundColor: selectedBackgroundColor }}
+            >
+              {text}
+            </pre>{" "}
             {/* for testing if we are getting the input */}
             {/* button to click to show the drawer */}
             <Button onClick={toggleDrawer("right", true)}>Settings</Button>
