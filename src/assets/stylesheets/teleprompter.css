@@ -1,5 +1,6 @@
 body {
     margin: 0px; /* removes the space around the div */
+    font-family: 'Inter', sans-serif;
     background-color: #E6E6FA;
 }
 
@@ -25,13 +26,14 @@ body {
 }
 
 .inter-font {
-    font-family: 'Inter', sans-serif;;
+    font-family: 'Inter', sans-serif;
 }
 
 .add-text-section {
     margin-top: 100px;
     background-color: white;
     width: 50%;
+    border-radius: 5px;
 }
 
 .centered-div {

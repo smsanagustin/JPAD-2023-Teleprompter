@@ -129,7 +129,9 @@ function Teleprompter() {
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page" >
+      {/* renders the header part of the screen */}
       <Header/>
+
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
         <SplitContent
@@ -155,6 +157,8 @@ function Teleprompter() {
           />
         </Center>
       </TeleprompterRibbon>
+
+      {/* added divs to center the add-text section */}
       <div className="centered-div">
         <div className="add-text-section ">
           {
