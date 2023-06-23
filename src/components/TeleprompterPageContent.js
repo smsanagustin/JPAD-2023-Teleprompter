@@ -6,7 +6,7 @@ function TeleprompterPageContent(props){
     //  obtain the subcomponents inside it throught props.children
     const children = props.children;
 
-    return <div className='TeleprompterPageContent'>
+    return <div className='TeleprompterPageContent centered-div'>
         {/* EDIT THE LAYOUT BELOW */}
         {children}
     </div>

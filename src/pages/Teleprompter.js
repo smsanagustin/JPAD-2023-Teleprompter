@@ -9,6 +9,7 @@ import {
 } from "../model/values";
 
 import Center from "../components/Center";
+import Header from "../components/Header";
 import PanelTab from "../components/PanelTab";
 import SplitContent from "../components/SplitContent";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
@@ -128,7 +129,7 @@ function Teleprompter() {
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page" >
-      http://localhost:3000/teleprompter
+      <Header/>
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
         <SplitContent
@@ -154,46 +155,44 @@ function Teleprompter() {
           />
         </Center>
       </TeleprompterRibbon>
-      {
-        //  SHOW THIS CONTENT IN THE BODY WHEN THE "Text" TAB IS SELECTED
-        tab == TAB_NAMES.text ? (
-          <TeleprompterPageContent>
-            <p> Enter text: </p>
-            <textarea
-              className="textInput"
-              value={text}
-              onChange={handleTextChange}
-            />{" "}
-            {/* todo: fixed text area */}
-            <br />
-            <br />
-            <pre
-              style={{ color: selectedTextColor, fontSize: selectedFontSize, backgroundColor: selectedBackgroundColor }}
-            >
-              {text}
-            </pre>{" "}
-            {/* for testing if we are getting the input */}
-            {/* button to click to show the drawer */}
-            <Button onClick={toggleDrawer("right", true)}>Settings</Button>
-            {/* displays the drawer */}
-            <Drawer
-              anchor="right"
-              open={sidebar["right"]}
-              onClose={toggleDrawer("right", false)}
-            >
-              {sidebarContent("right")}
-            </Drawer>
-          </TeleprompterPageContent>
-        ) : null
-      }
-      {
-        //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
-        tab == TAB_NAMES.teleprompter ? (
-          <TeleprompterPageContent>
-            Current tab: "{tab}"
-          </TeleprompterPageContent>
-        ) : null
-      }
+      <div className="centered-div">
+        <div className="add-text-section ">
+          {
+            //  SHOW THIS CONTENT IN THE BODY WHEN THE "Text" TAB IS SELECTED
+            tab == TAB_NAMES.text ? (
+              <TeleprompterPageContent>
+                <p> Enter text: </p>
+                <textarea
+                  className="textInput"
+                  value={text}
+                  onChange={handleTextChange}
+                />{" "}
+                {/* todo: fixed text area */}
+                <br />
+                <br />
+                {/* button to click to show the drawer */}
+                <Button onClick={toggleDrawer("right", true)}>Settings</Button>
+                {/* displays the drawer */}
+                <Drawer
+                  anchor="right"
+                  open={sidebar["right"]}
+                  onClose={toggleDrawer("right", false)}
+                >
+                  {sidebarContent("right")}
+                </Drawer>
+              </TeleprompterPageContent>
+            ) : null
+          }
+        </div>
+        {
+          //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
+          tab == TAB_NAMES.teleprompter ? (
+            <TeleprompterPageContent>
+              Current tab: "{tab}"
+            </TeleprompterPageContent>
+          ) : null
+        }
+      </div>
     </div>
   );
 }
