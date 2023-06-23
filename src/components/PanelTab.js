@@ -9,7 +9,6 @@ function PanelTab(props){
 
     return <div className='PanelTab' onClick={onClick}>
         {/* EDIT THE LAYOUT BELOW */}
-        {tabname}
     </div>
 }
 export default PanelTab;

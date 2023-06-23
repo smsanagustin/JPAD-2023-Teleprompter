@@ -131,7 +131,6 @@ function Teleprompter() {
       http://localhost:3000/teleprompter
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
-        Ribbon
         <SplitContent
           left={[]} // insert the array of components
           right={[]} //insert the array of components
@@ -159,7 +158,7 @@ function Teleprompter() {
         //  SHOW THIS CONTENT IN THE BODY WHEN THE "Text" TAB IS SELECTED
         tab == TAB_NAMES.text ? (
           <TeleprompterPageContent>
-            <p> Insert text: </p>
+            <p> Enter text: </p>
             <textarea
               className="textInput"
               value={text}
