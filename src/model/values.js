@@ -1,9 +1,14 @@
-
+import React from "react";
 
 const TAB_NAMES = {
     'write': 'Write',
     'teleprompter': 'Teleprompter',
     'defaultval': "Write"
+}
+
+const MODAL = {
+    'writeWithAi': 'writeWithAi',
+    'hidden': 'hidden',
 }
 
 const MODES = {
@@ -36,4 +41,13 @@ const COLORS = {
     'BLACK': {name: '', src: ''}
 };
 
-export {TAB_NAMES, MODES, FONT_SIZE_LIMITS, SCROLL_SPEED_LIMITS, FONTS, COLORS}
+const AI_REWRITE_OPTIONS = {
+    'asd': {
+        title: '',
+        image: <img src = ''/>,
+        description: ''
+    }
+}
+
+
+export {TAB_NAMES, MODAL, MODES, FONT_SIZE_LIMITS, SCROLL_SPEED_LIMITS, FONTS, COLORS, AI_REWRITE_OPTIONS}

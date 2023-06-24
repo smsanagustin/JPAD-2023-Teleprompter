@@ -7,7 +7,9 @@ import './assets/stylesheets/theme.css'
 import './assets/stylesheets/components.css'
 
 
+
 //  comment this line below to remove the boders around divs
+  import './assets/stylesheets/wireframe.css'
 // import './assets/stylesheets/bounds.css'
 
 

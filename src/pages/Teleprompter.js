@@ -1,50 +1,61 @@
-import React, { useState } from "react";
+
 import {
   TAB_NAMES,
+  MODAL,
   MODES,
   FONT_SIZE_LIMITS,
   SCROLL_SPEED_LIMITS,
   FONTS,
   COLORS,
+  AI_REWRITE_OPTIONS,
 } from "../model/values";
 
-import Center from "../components/Center";
+
 import AppIconText from "../components/AppIconText";
+import Center from "../components/Center";
 import TrainTabs from "../components/TrainTabs";
 import SplitContent from "../components/SplitContent";
 import IconTextButton from "../components/IconTextButton";
+import Modal from '../components/Modal';
 import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
+
+
+import React, { useState } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
+import ImageTextCard from "../components/ImageTextCard";
 
 
 
 function Teleprompter() {
-  //  Add states as necessary
+  //  Add states as necessary **********************************************************************************
+
+  //  ******************** [ STRUCTURAL STATES ] ********************
   const [tab, setTab] = useState(TAB_NAMES.defaultval);
-  const [text, setText] = useState("");
   const [sidebar, setSideBar] = useState({ right: false });
+  const [modal, setModal] = useState(MODAL.hidden);
+ 
+
+  //  ******************** [ DATA STATES ] ********************
+  const [text, setText] = useState("");
   const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
   const [position, setPosition] = useState(0);
-  const [scrollSpeed, setScrollSpeed] = useState(
-    SCROLL_SPEED_LIMITS.defaultval
-  );
+  const [scrollSpeed, setScrollSpeed] = useState(SCROLL_SPEED_LIMITS.defaultval);
+
+
+  //  ******************** [ STYLING STATES ] ********************
   const [selectedFont, setSelectedFont] = useState(FONTS.defaultval);
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
-  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
-    COLORS.BLACK
-  );
+  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(COLORS.BLACK);
   const [opacity, setOpacity] = useState(1);
 
 
-  const RibbonLeftContent = [
 
-  ];
 
   /* handles the changes when theres an input in the textarea */
   const handleTextChange = (event) => {
@@ -135,6 +146,9 @@ function Teleprompter() {
     </Box>
   );
 
+
+
+
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page" >
@@ -146,6 +160,8 @@ function Teleprompter() {
         <SplitContent
           left={[<AppIconText/>]} // insert the array of components
           right={[
+            <IconTextButton icon='magic_button' onClick = {() => {setModal(MODAL.writeWithAi)}} className = "margin-right-1 highlight-2 hover-highlight-2">Rewrite with AI</IconTextButton>,
+            <IconTextButton icon='save' onClick = {() => {}}></IconTextButton>,
             <IconTextButton icon='palette' onClick = {toggleDrawer("right", true)}></IconTextButton>,
             <IconTextButton icon='slideshow'></IconTextButton>
           ]} //insert the array of components
@@ -153,10 +169,12 @@ function Teleprompter() {
         <Center>
           <TrainTabs tabs = {[
             {tabname: TAB_NAMES.defaultval, /* has the same value as TAB_NAMES.write */
-            onClick: () => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */}},
+            onClick: () => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */}, 
+            isSelected: TAB_NAMES.defaultval == tab},
 
             {tabname: TAB_NAMES.teleprompter,
-            onClick: () => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ }}
+            onClick: () => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ },
+            isSelected: TAB_NAMES.teleprompter == tab},
           ]}/>
         </Center>
       </TeleprompterRibbon>
@@ -190,6 +208,22 @@ function Teleprompter() {
               Current tab: "{tab}"
             </TeleprompterPageContent>
           ) : null
+        }
+
+        {
+          modal == MODAL.writeWithAi
+            ? <Modal title={'Let AI rewrite your text'} onClose={() => {setModal(MODAL.hidden)}}>
+                {
+                  Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
+                    <ImageTextCard
+                      image = {option.title}
+                      title = {option.image}
+                      description = {option.description}
+                    />
+                  ))
+                }
+              </Modal>
+            : null
         }
 
     </div>

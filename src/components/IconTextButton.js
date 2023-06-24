@@ -7,25 +7,20 @@ function IconTextButton(props){
     const children = props.children;
     const icon = props.icon;
     const onClick = props.onClick;
+    const className = props.className;
 
     return <div
         onClick={onClick}
         className={
-        `IconTextButton hover-content-highlight pointer hover-gray
+        `IconTextButton hover-content-highlight pointer hover-gray ${className}
         ${children != null && children != undefined ? 'rounded-corner'
         : icon != null && icon != undefined ? 'round-3sd'
         : ''}`}>
         {/* EDIT THE LAYOUT BELOW */}
         {   icon != null && icon != undefined
-            ? <div className='icon'>
-                <span className="material-symbols-rounded"> {icon}</span>
-            </div>
+            ?   <span className="icon material-symbols-rounded"> {icon}</span>
             : null}
-        {   children != null && children != undefined
-            ? <div className='children'>
-                {children.map((elem) => elem)}
-            </div>
-            : null}
+        {children}
     </div>
 }
 export default IconTextButton;

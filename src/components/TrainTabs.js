@@ -10,7 +10,7 @@ function TrainTabs(props){
     return <div className='TrainTabs'>
         {children}
         {tabs.map((tab) => 
-            <div className = "tab" onClick = {tab.onClick}>
+            <div className = {`tab ${tab.isSelected ? 'highlight-1' : ''}`} onClick = {tab.onClick}>
                 {tab.tabname}
                 
             </div>
