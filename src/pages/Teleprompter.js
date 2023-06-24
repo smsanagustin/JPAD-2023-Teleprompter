@@ -9,14 +9,18 @@ import {
 } from "../model/values";
 
 import Center from "../components/Center";
-import Header from "../components/Header";
-import PanelTab from "../components/PanelTab";
+import AppIconText from "../components/AppIconText";
+import TrainTabs from "../components/TrainTabs";
 import SplitContent from "../components/SplitContent";
+import IconTextButton from "../components/IconTextButton";
+import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
+
+
 
 function Teleprompter() {
   //  Add states as necessary
@@ -40,14 +44,6 @@ function Teleprompter() {
 
   const RibbonLeftContent = [
 
-  ];
-  const RibbonRightContent = [
-    <span class="material-symbols-rounded">
-      palette
-    </span>,
-    <span class="material-symbols-rounded">
-      slideshow
-    </span>
   ];
 
   /* handles the changes when theres an input in the textarea */
@@ -148,40 +144,34 @@ function Teleprompter() {
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
         <SplitContent
-          left={RibbonLeftContent} // insert the array of components
-          right={RibbonRightContent} //insert the array of components
+          left={[<AppIconText/>]} // insert the array of components
+          right={[
+            <IconTextButton icon='palette' onClick = {toggleDrawer("right", true)}></IconTextButton>,
+            <IconTextButton icon='slideshow'></IconTextButton>
+          ]} //insert the array of components
         />
         <Center>
-          <PanelTab
-            tabname = {TAB_NAMES.defaultval /* has the same value as TAB_NAMES.text */}
-            onClick = {() => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Text" tab */}}
-          />
-          <PanelTab
-            tabname = {TAB_NAMES.teleprompter}
-            onClick = {() => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ }}
-          />
+          <TrainTabs tabs = {[
+            {tabname: TAB_NAMES.defaultval, /* has the same value as TAB_NAMES.write */
+            onClick: () => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */}},
+
+            {tabname: TAB_NAMES.teleprompter,
+            onClick: () => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ }}
+          ]}/>
         </Center>
       </TeleprompterRibbon>
 
       {/* added divs to center the add-text section */}
-      <div className="centered-div">
-        <div className="add-text-section ">
+
+
           {
-            //  SHOW THIS CONTENT IN THE BODY WHEN THE "Text" TAB IS SELECTED
-            tab == TAB_NAMES.text ? (
+            //  SHOW THIS CONTENT IN THE BODY WHEN THE "Write" TAB IS SELECTED
+            tab == TAB_NAMES.write ? (
               <TeleprompterPageContent>
-                <p> Enter text: </p>
-                <textarea
-                  className="textInput"
-                  value={text}
-                  onChange={handleTextChange}
-                />{" "}
-                {/* todo: fixed text area */}
-                <br />
-                <br />
-                {/* button to click to show the drawer */}
-                <Button onClick={toggleDrawer("right", true)}>Settings</Button>
-                {/* displays the drawer */}
+                <DocPage value={text} onChange={handleTextChange} placeholder="Write your script">
+
+                </DocPage>
+
                 <Drawer
                   anchor="right"
                   open={sidebar["right"]}
@@ -192,7 +182,7 @@ function Teleprompter() {
               </TeleprompterPageContent>
             ) : null
           }
-        </div>
+
         {
           //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
           tab == TAB_NAMES.teleprompter ? (
@@ -201,7 +191,7 @@ function Teleprompter() {
             </TeleprompterPageContent>
           ) : null
         }
-      </div>
+
     </div>
   );
 }

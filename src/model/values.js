@@ -1,9 +1,9 @@
 
 
 const TAB_NAMES = {
-    'text': 'Text',
+    'write': 'Write',
     'teleprompter': 'Teleprompter',
-    'defaultval': "Text"
+    'defaultval': "Write"
 }
 
 const MODES = {

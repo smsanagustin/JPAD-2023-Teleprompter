@@ -1,8 +1,112 @@
 
 
+/*
+    WHAT STYLINGS SHOULD BE IN HERE:
+    - Positioning
+    - Structure
+    - Dimension sizes
+    - Paddings and Margins
+    - Grids and flexboxes
+    - Rounded corners
+
+
+    WHAT STYLINGS SHOUD NOT BE IN HERE: 
+    - Colors
+    - Font styles
+    - Borders
+    - Hover appearance
+*/
+
+
+
+/*  COMPONENT ****************************** [ AppIconText ] ****************************** */
+
+.AppIconText{
+    display: flex;
+    gap: var(--SDsize);
+
+    align-items: center;
+}
+.AppIconText .icon{
+    height: calc(2 * var(--SDsize));
+}
+
+
+/*  COMPONENT ****************************** [ Center ] ****************************** */
+
+.Center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*  COMPONENT ****************************** [ DocPage ] ****************************** */
+
+.DocPage{
+    padding: calc(5 * var(--SDsize));
+    width: calc(55 * var(--SDsize));
+}
+.DocPage textarea{
+    height: calc(100% + calc(5 * var(--SDsize)));
+    width: 100%;
+}
+
+
+/*  COMPONENT ****************************** [ TeleprompterRibbon ] ****************************** */
+
 .TeleprompterRibbon{
-    background-color: white;
+    background-color: white; /* move this somewhere soon */
     padding: calc(2 * var(--SDsize));
     padding-bottom: 0;
 }
 
+
+
+/*  COMPONENT ****************************** [ IconTextButton ] ****************************** */
+
+.IconTextButton{
+    display: flex;
+
+}
+.IconTextButton.round-3sd{
+    --k: calc(3 * var(--SDsize));
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: var(--k);
+    height: var(--k);
+    border-radius: calc(2 * var(--k));
+}
+
+
+/*  COMPONENT ****************************** [ SplitContent ] ****************************** */
+
+.SplitContent, .SplitContent .left, .SplitContent .right{
+    display: flex;
+}
+.SplitContent{
+    justify-content: space-between;
+}
+
+
+
+/*  COMPONENT ****************************** [ TrainTabs ] ****************************** */
+
+.TrainTabs{
+    display: flex;
+    padding: calc(0.5 * var(--SDsize));
+    gap: var(--SDsize);
+}
+
+.TrainTabs .tab{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: var(--SDsize);
+    padding-bottom: var(--SDsize);
+    width: calc(10 * var(--SDsize));
+}
