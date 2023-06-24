@@ -32,6 +32,7 @@ function Teleprompter() {
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
+  const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(50);
   const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
     COLORS.BLACK
   );
@@ -90,7 +91,21 @@ function Teleprompter() {
       <Divider></Divider>
       <h3>Font Style</h3>
       <p>Font Style</p>
-      {/* insert implementation of font style */}
+      <select 
+      id="font-style" 
+      name="font-style" 
+      value={selectedFont}
+      onChange={(font) => {
+          setSelectedFont(parseInt(font.target.value));
+        }}>
+        <option> Serif </option>
+        <option> Arial </option>
+        <option> Sans-Serif </option>                                  
+        <option> Tahoma </option>
+        <option> Verdana </option>
+        <option> Lucida Sans Unicode </option>                               
+      </select>
+
       <p>Font Color</p>
       <TwitterPicker
         color={selectedTextColor}
@@ -128,14 +143,16 @@ function Teleprompter() {
       />
     <Divider></Divider>
     <h3>Scroll Speed</h3>
-    <select value={scrollSpeed} id="scroll-speed-input" onChange={handleScrollSpeedChange}>
-        <option value="-2.0" >- 2.0x</option>
-        <option value="-1.5">- 1.5x</option>
-        <option value="1.0">1.0x</option>
-        <option value="1.5">1.5x</option>
-        <option value="2.0">2.0x</option>
-    </select>
-    <p>Selected speed: {scrollSpeed}</p>
+    <input
+        type="number"
+        name="scroll-speed"
+        id="scroll-speed"
+        value={selectedScrollSpeed}
+        onChange={(speed) => {
+          setSelectedScrollSpeed(parseInt(speed.target.value));
+        }}
+      />
+    <p>Selected speed: {selectedScrollSpeed}</p>
     </Box>
   );
 
