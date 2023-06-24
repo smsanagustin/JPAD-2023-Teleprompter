@@ -36,6 +36,9 @@ function Teleprompter() {
   );
   const [opacity, setOpacity] = useState(1);
 
+
+
+
   /* handles the changes when theres an input in the textarea */
   const handleTextChange = (event) => {
     const { value } = event.target;
@@ -138,20 +141,12 @@ function Teleprompter() {
         />
         <Center>
           <PanelTab
-            tabname={
-              TAB_NAMES.defaultval /* has the same value as TAB_NAMES.text */
-            }
-            onClick={() => {
-              setTab(TAB_NAMES.defaultval); /* SELECT THE "Text" tab */
-            }}
+            tabname = {TAB_NAMES.defaultval /* has the same value as TAB_NAMES.text */}
+            onClick = {() => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Text" tab */}}
           />
           <PanelTab
-            tabname={TAB_NAMES.teleprompter}
-            onClick={() => {
-              setTab(
-                TAB_NAMES.teleprompter
-              ); /* SELECT THE "Teleprompter" tab */
-            }}
+            tabname = {TAB_NAMES.teleprompter}
+            onClick = {() => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ }}
           />
         </Center>
       </TeleprompterRibbon>
@@ -161,26 +156,26 @@ function Teleprompter() {
           <TeleprompterPageContent>
             <p> Insert text: </p>
             <textarea
-              className="textInput"
-              value={text}
-              onChange={handleTextChange}
+              className = "textInput"
+              value = {text}
+              onChange = {handleTextChange}
             />{" "}
             {/* todo: fixed text area */}
             <br />
             <br />
             <pre
-              style={{ color: selectedTextColor, fontSize: selectedFontSize, backgroundColor: selectedBackgroundColor }}
+              style = {{ color: selectedTextColor, fontSize: selectedFontSize, backgroundColor: selectedBackgroundColor }}
             >
               {text}
             </pre>{" "}
             {/* for testing if we are getting the input */}
             {/* button to click to show the drawer */}
-            <Button onClick={toggleDrawer("right", true)}>Settings</Button>
+            <Button onClick = {toggleDrawer("right", true)}>Settings</Button>
             {/* displays the drawer */}
             <Drawer
-              anchor="right"
-              open={sidebar["right"]}
-              onClose={toggleDrawer("right", false)}
+              anchor = "right"
+              open = {sidebar["right"]}
+              onClose = {toggleDrawer("right", false)}
             >
               {sidebarContent("right")}
             </Drawer>
