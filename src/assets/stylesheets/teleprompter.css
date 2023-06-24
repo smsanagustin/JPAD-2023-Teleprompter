@@ -1,0 +1,44 @@
+body {
+    margin: 0px; /* removes the space around the div */
+    font-family: 'Inter', sans-serif;
+    background-color: #E6E6FA;
+}
+
+.header {
+    background-color: white;
+    padding: 20px;
+}
+
+.teleprompter-row {
+    display: flex;
+    flex: row;
+    align-items: center;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+}
+
+.header-text {
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.inter-font {
+    font-family: 'Inter', sans-serif;
+}
+
+.add-text-section {
+    margin-top: 100px;
+    background-color: white;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.centered-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

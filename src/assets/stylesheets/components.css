@@ -1,0 +1,8 @@
+
+
+.TeleprompterRibbon{
+    background-color: white;
+    padding: calc(2 * var(--SDsize));
+    padding-bottom: 0;
+}
+
