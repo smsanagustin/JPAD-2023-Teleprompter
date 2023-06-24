@@ -28,7 +28,7 @@ function Teleprompter() {
   const [scrollSpeed, setScrollSpeed] = useState(
     SCROLL_SPEED_LIMITS.defaultval
   );
-  const [selectedFont, setSelectedFont] = useState(FONTS.defaultval);
+  const [selectedFont, setSelectedFont] = useState("");
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
@@ -64,9 +64,9 @@ function Teleprompter() {
   };
 
 
-  const handleScrollSpeedChange = (event) => {
-    const newScrollSpeed = parseFloat(event.target.value);
-    setScrollSpeed(newScrollSpeed);
+  const handleFontChange = (event) => {
+    const {newFont} = event.target;
+    setSelectedFont(newFont);
   };
 
   /* depending on the key/mouse pressed it would open/close the sidebar */
@@ -95,9 +95,7 @@ function Teleprompter() {
       id="font-style" 
       name="font-style" 
       value={selectedFont}
-      onChange={(font) => {
-          setSelectedFont(parseInt(font.target.value));
-        }}>
+      onChange={handleFontChange}>
         <option> Serif </option>
         <option> Arial </option>
         <option> Sans-Serif </option>                                  
