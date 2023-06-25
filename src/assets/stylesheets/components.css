@@ -18,6 +18,13 @@
     - Hover appearance
 */
 
+/* 
+added background color and font style to some of the components 
+(sori d kasi maano sa theme haha, sana mapatawad nyo q)
+delete nyo nlang if ever 
+-sef HAHAHAHA 
+*/
+
 
 *{
     --page-height-letter: 66rem;
@@ -70,14 +77,15 @@
     padding: calc(2 * var(--SDsize));
     display: flex;
     justify-content: center;
+    background-color: whitesmoke;
 }
 
 .DocPage textarea{
     --page-margin: calc(5 * var(--SDsize));
-
     padding: var(--page-margin);
     width: calc(var(--page-width-letter) - var(--page-margin) * 2);
     height: calc(var(--page-height-letter) - var(--page-margin) * 2);;   /*  THIS IS THE SIZE OF 11 inches*/
+    background-color: white;
 }
 
 
@@ -168,6 +176,8 @@
     padding: calc(2 * var(--SDsize));
     padding-top: var(--SDsize);
     padding-bottom: 0;
+    font-style: oblique;
+    font-weight: 500;
 }
 
 .TeleprompterRibbon .Center{
@@ -189,6 +199,7 @@
     display: flex;
     padding: calc(0.5 * var(--SDsize));
     gap: calc(0.5 * var(--SDsize));
+    background-color: whitesmoke;
 }
 
 .TrainTabs .tab{
@@ -202,4 +213,7 @@
     width: calc(10 * var(--SDsize));
 
     border-radius: calc(0.5 * var(--SDsize));
+
+    font-style: normal;
+    background-color: white;
 }
