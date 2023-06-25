@@ -43,6 +43,37 @@ body, input, textarea{
     --gray8: hsl(0, 0%, 60%);
 }
 
+*{
+    --docPage-bg: whitesmoke;
+}
+
+.TeleprompterRibbon{
+    font-style: oblique;
+    font-weight: 500; 
+}
+
+.DocPage{
+    background-color: var(--docPage-bg);
+}
+
+.DocPage textarea{
+    background-color: white;
+    font-style: normal;
+}
+
+.TeleprompterPageContent{
+    background-color: var(--docPage-bg);
+}
+
+.TrainTabs{
+    background-color: var(--docPage-bg);
+}
+
+.TrainTabs .tab{
+    background-color: white;
+    font-style: normal;
+}
+
 .white{
     background-color: white;
 }
