@@ -236,6 +236,14 @@ function Teleprompter() {
           tab == TAB_NAMES.teleprompter ? (
             <TeleprompterPageContent>
               Current tab: "{tab}"
+
+              <Drawer
+                anchor="right"
+                open={sidebar["right"]}
+                onClose={toggleDrawer("right", false)}
+              >
+                {sidebarContent("right")}
+              </Drawer>
             </TeleprompterPageContent>
           ) : null
         }
