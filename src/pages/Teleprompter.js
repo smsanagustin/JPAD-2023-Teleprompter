@@ -198,11 +198,13 @@ function Teleprompter() {
           <TrainTabs tabs = {[
             {tabname: TAB_NAMES.defaultval, /* has the same value as TAB_NAMES.write */
             onClick: () => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */}, 
-            isSelected: TAB_NAMES.defaultval == tab},
+            isSelected: TAB_NAMES.defaultval == tab,
+          },
 
             {tabname: TAB_NAMES.teleprompter,
             onClick: () => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ },
-            isSelected: TAB_NAMES.teleprompter == tab},
+            isSelected: TAB_NAMES.teleprompter == tab,
+          },
           ]}/>
         </Center>
       </TeleprompterRibbon>
