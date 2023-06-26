@@ -1,8 +1,209 @@
 
 
-.TeleprompterRibbon{
-    background-color: white;
+/*
+    WHAT STYLINGS SHOULD BE IN HERE:
+    - Positioning
+    - Structure
+    - Dimension sizes
+    - Paddings and Margins
+    - Grids and flexboxes
+    - Rounded corners
+    - overflow
+
+
+    WHAT STYLINGS SHOUD NOT BE IN HERE: 
+    - Colors
+    - Font styles
+    - Borders
+    - Hover appearance
+*/
+
+
+
+*{
+    --page-height-letter: 66rem;
+    --page-width-letter: 51rem;
+
+    --max-container-width: 40rem;
+    --mix-container-width: 20rem;
+
+    --max-container-height: 60rem;
+    --min-container-height: 40rem;
+}
+
+.rounded-corner{
+    border-radius: calc(0.5 * var(--SDsize));
+}
+
+.large-container{
     padding: calc(2 * var(--SDsize));
+}
+
+.margin-right-1{
+    margin-right: calc(1 * var(--SDsize));
+}
+
+/*  COMPONENT ****************************** [ AppIconText ] ****************************** */
+
+.AppIconText{
+    display: flex;
+    gap: var(--SDsize);
+
+    align-items: center;
+}
+.AppIconText .icon{
+    height: calc(2 * var(--SDsize));
+}
+
+
+/*  COMPONENT ****************************** [ Center ] ****************************** */
+
+.Center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*  COMPONENT ****************************** [ DocPage ] ****************************** */
+
+.DocPage{
+    padding: calc(2 * var(--SDsize));
+    display: flex;
+    justify-content: center;
+
+}
+
+.DocPage textarea{
+    --page-margin: calc(5 * var(--SDsize));
+    padding: var(--page-margin);
+    width: calc(var(--page-width-letter) - var(--page-margin) * 2);
+    height: calc(var(--page-height-letter) - var(--page-margin) * 2);;   /*  THIS IS THE SIZE OF 11 inches*/
+}
+
+
+
+/*  COMPONENT ****************************** [ TeleprompterPageContent ] ****************************** */
+
+.TeleprompterPageContent{
+    height: calc(100vh - (13 * var(--SDsize)));
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    -ms-overflow-style: none; /* for Edge */
+    scrollbar-width: none; /* for Firefox */
+}
+.DocPage .TeleprompterPageContent::-webkit-scrollbar {
+    display: none;
+  }
+
+
+
+/*  COMPONENT ****************************** [ IconTextButton ] ****************************** */
+
+.IconTextButton{
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(0.5 * var(--SDsize));
+}
+.IconTextButton.rounded-corner{
+    padding: var(--SDsize);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.IconTextButton.round-3sd{
+    --k: calc(3 * var(--SDsize));
+    
+    width: var(--k);
+    height: var(--k);
+    border-radius: calc(2 * var(--k));
+}
+
+
+
+/*  COMPONENT ****************************** [ Modal ] ****************************** */
+
+.Modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Modal .large-container{
+    max-width: var(--max-container-width);
+    border-radius: calc(1 * var(--SDsize));
+}
+
+.Modal .header .left{
+    display: flex;
+    align-items: center;
+}
+
+
+
+/*  COMPONENT ****************************** [ SplitContent ] ****************************** */
+
+.SplitContent, .SplitContent .left, .SplitContent .right{
+    display: flex;
+}
+.SplitContent{
+    gap: calc(var(--SDsize));
+    justify-content: space-between;
+}
+
+
+
+/*  COMPONENT ****************************** [ TeleprompterRibbon ] ****************************** */
+
+.TeleprompterRibbon{
+    background-color: white; /* move this somewhere soon */
+    padding: calc(2 * var(--SDsize));
+    padding-top: var(--SDsize);
     padding-bottom: 0;
 }
 
+.TeleprompterRibbon .Center{
+    padding: calc(var(--SDsize));
+    padding-top: calc(0.5 * var(--SDsize));
+}
+
+.TeleprompterRibbon .TrainTabs{
+    width:  calc(var(--page-width-letter) - var(--SDsize));
+
+    border-radius: calc(var(--SDsize));
+}
+
+
+
+/*  COMPONENT ****************************** [ TrainTabs ] ****************************** */
+
+.TrainTabs{
+    display: flex;
+    padding: calc(0.5 * var(--SDsize));
+    gap: calc(0.5 * var(--SDsize));
+}
+
+.TrainTabs .tab{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: var(--SDsize);
+    padding-bottom: var(--SDsize);
+    width: calc(10 * var(--SDsize));
+
+    border-radius: calc(0.5 * var(--SDsize));
+
+    font-style: normal;
+
+}

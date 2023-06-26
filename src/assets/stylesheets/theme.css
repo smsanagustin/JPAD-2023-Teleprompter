@@ -1,8 +1,129 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+/*
+    WHAT STYLINGS SHOUD BE IN HERE: 
+    - Colors
+    - Font styles
+    - Borders
+    - Hover appearance
 
+
+    WHAT STYLINGS SHOULD NOT BE IN HERE:
+    - Positioning
+    - Structure
+    - Dimension sizes
+    - Paddings and Margins
+    - Grids and flexboxes
+    - Rounded corners
+    - overflow
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&display=swap');
+
+/* MAIN THEME */
+
+body, input, textarea{
+    /*  Default styling */
+    color: hsl(0, 0%, 30%);
+    font-family: 'Yantramanav', sans-serif;
+    
+    /*  Global variable stylings */
+    --SDsize: 1rem;
+    --accent-color: hsl(253, 86%, 53%);
+    --accent-color-1: hsl(253, 86%, 66%);
+
+    --gray0: hsl(0, 0%, 98%);
+    --gray1: hsl(0, 0%, 95%);
+    --gray2: hsl(0, 0%, 90%);
+    --gray3: hsl(0, 0%, 85%);
+    --gray4: hsl(0, 0%, 80%);
+
+    --gray8: hsl(0, 0%, 60%);
+}
 
 *{
-    --SDsize: 1rem;
+    --docPage-bg: whitesmoke;
+}
+
+.TeleprompterRibbon{
+    font-style: oblique;
+    font-weight: 500; 
+}
+
+.DocPage{
+    background-color: var(--docPage-bg);
+}
+
+.DocPage textarea{
+    background-color: white;
+    font-style: normal;
+}
+
+.TeleprompterPageContent{
+    background-color: var(--docPage-bg);
+}
+
+.TrainTabs{
+    background-color: var(--docPage-bg);
+}
+
+.TrainTabs .tab{
+    background-color: white;
+    font-style: normal;
+}
+
+.white{
+    background-color: white;
+}
+
+.opaque-black-50{
+    background-color: hsla(0, 0%, 0%, 0.5);
+}
+.opaque-white-50{
+    background-color: hsla(0, 0%, 100%, 0.5);
+}
+
+
+.hover-gray:hover{
+    background-color: var(--gray2);
+}
+
+.hover-content-highlight:hover{
+    color: var(--accent-color);
+}
+
+.highlight-1{
+    background-color: whitesmoke;
+    color: var(--accent-color);
+}
+
+.highlight-2{
+    background-color: var(--accent-color);
+    color: white;
+}
+.hover-highlight-2:hover{
+    background-color: var(--accent-color-1);
+    color: white;
+}
+
+
+.shadow-large {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12), 0 12px 40px 0 rgba(0, 0, 0, 0.06);
+  }
+  
+
+
+.no-appearance{
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+}
+
+
+
+.pointer{
+    cursor: pointer;
 }

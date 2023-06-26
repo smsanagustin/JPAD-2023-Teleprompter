@@ -1,28 +1,46 @@
-import React, { useState } from "react";
+
 import {
   TAB_NAMES,
+  MODAL,
   MODES,
   FONT_SIZE_LIMITS,
   SCROLL_SPEED_LIMITS,
   FONTS,
   COLORS,
+  AI_REWRITE_OPTIONS,
 } from "../model/values";
 
+
+import AppIconText from "../components/AppIconText";
 import Center from "../components/Center";
-import Header from "../components/Header";
-import PanelTab from "../components/PanelTab";
+import TrainTabs from "../components/TrainTabs";
 import SplitContent from "../components/SplitContent";
+import IconTextButton from "../components/IconTextButton";
+import Modal from '../components/Modal';
+import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
+
+
+import React, { useState } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
+import ImageTextCard from "../components/ImageTextCard";
+
+
 
 function Teleprompter() {
-  //  Add states as necessary
+  //  Add states as necessary **********************************************************************************
+
+  //  ******************** [ STRUCTURAL STATES ] ********************
   const [tab, setTab] = useState(TAB_NAMES.defaultval);
-  const [text, setText] = useState("");
   const [sidebar, setSideBar] = useState({ right: false });
+  const [modal, setModal] = useState(MODAL.hidden);
+ 
+
+  //  ******************** [ DATA STATES ] ********************
+  const [text, setText] = useState("");
   const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
   const [position, setPosition] = useState(0);
   const [scrollSpeed, setScrollSpeed] = useState(
@@ -39,17 +57,7 @@ function Teleprompter() {
   const [opacity, setOpacity] = useState(1);
 
 
-  const RibbonLeftContent = [
 
-  ];
-  const RibbonRightContent = [
-    <span class="material-symbols-rounded">
-      palette
-    </span>,
-    <span class="material-symbols-rounded">
-      slideshow
-    </span>
-  ];
 
   /* handles the changes when theres an input in the textarea */
   const handleTextChange = (event) => {
@@ -154,6 +162,9 @@ function Teleprompter() {
     </Box>
   );
 
+
+
+
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page" >
@@ -163,40 +174,38 @@ function Teleprompter() {
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
         <SplitContent
-          left={RibbonLeftContent} // insert the array of components
-          right={RibbonRightContent} //insert the array of components
+          left={[<AppIconText/>]} // insert the array of components
+          right={[
+            <IconTextButton icon='magic_button' onClick = {() => {setModal(MODAL.writeWithAi)}} className = "margin-right-1 highlight-2 hover-highlight-2">Rewrite with AI</IconTextButton>,
+            <IconTextButton icon='save' onClick = {() => {}}></IconTextButton>,
+            <IconTextButton icon='palette' onClick = {toggleDrawer("right", true)}></IconTextButton>,
+            <IconTextButton icon='slideshow'></IconTextButton>
+          ]} //insert the array of components
         />
         <Center>
-          <PanelTab
-            tabname = {TAB_NAMES.defaultval /* has the same value as TAB_NAMES.text */}
-            onClick = {() => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Text" tab */}}
-          />
-          <PanelTab
-            tabname = {TAB_NAMES.teleprompter}
-            onClick = {() => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ }}
-          />
+          <TrainTabs tabs = {[
+            {tabname: TAB_NAMES.defaultval, /* has the same value as TAB_NAMES.write */
+            onClick: () => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */}, 
+            isSelected: TAB_NAMES.defaultval == tab},
+
+            {tabname: TAB_NAMES.teleprompter,
+            onClick: () => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ },
+            isSelected: TAB_NAMES.teleprompter == tab},
+          ]}/>
         </Center>
       </TeleprompterRibbon>
 
       {/* added divs to center the add-text section */}
-      <div className="centered-div">
-        <div className="add-text-section ">
+
+
           {
-            //  SHOW THIS CONTENT IN THE BODY WHEN THE "Text" TAB IS SELECTED
-            tab == TAB_NAMES.text ? (
+            //  SHOW THIS CONTENT IN THE BODY WHEN THE "Write" TAB IS SELECTED
+            tab == TAB_NAMES.write ? (
               <TeleprompterPageContent>
-                <p> Enter text: </p>
-                <textarea
-                  className="textInput"
-                  value={text}
-                  onChange={handleTextChange}
-                />{" "}
-                {/* todo: fixed text area */}
-                <br />
-                <br />
-                {/* button to click to show the drawer */}
-                <Button onClick={toggleDrawer("right", true)}>Settings</Button>
-                {/* displays the drawer */}
+                <DocPage value={text} onChange={handleTextChange} placeholder="Write your script">
+
+                </DocPage>
+
                 <Drawer
                   anchor="right"
                   open={sidebar["right"]}
@@ -207,7 +216,7 @@ function Teleprompter() {
               </TeleprompterPageContent>
             ) : null
           }
-        </div>
+
         {
           //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
           tab == TAB_NAMES.teleprompter ? (
@@ -216,7 +225,23 @@ function Teleprompter() {
             </TeleprompterPageContent>
           ) : null
         }
-      </div>
+
+        {
+          modal == MODAL.writeWithAi
+            ? <Modal title={'Let AI rewrite your text'} onClose={() => {setModal(MODAL.hidden)}}>
+                {
+                  Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
+                    <ImageTextCard
+                      image = {option.title}
+                      title = {option.image}
+                      description = {option.description}
+                    />
+                  ))
+                }
+              </Modal>
+            : null
+        }
+
     </div>
   );
 }
