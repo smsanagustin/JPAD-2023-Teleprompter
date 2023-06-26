@@ -1,4 +1,6 @@
-
+* {
+    
+}
 
 /*
     WHAT STYLINGS SHOULD BE IN HERE:
@@ -75,6 +77,7 @@
 }
 
 .DocPage textarea{
+    border-radius: 5px;
     --page-margin: calc(5 * var(--SDsize));
     padding: var(--page-margin);
     width: calc(var(--page-width-letter) - var(--page-margin) * 2);

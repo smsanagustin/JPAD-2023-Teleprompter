@@ -90,16 +90,18 @@ function Teleprompter() {
 
   const sidebarContent = (anchor) => (
     <Box
+    class="drawer-style"
     //   role="presentation"
     //   onClick={toggleDrawer(anchor, false)}
     //   onKeyDown={toggleDrawer(anchor, false)}
     >
       {/* Add your drawer content here */}
-      <h1>Settings</h1>
+      <h1 class="settings-text">Settings</h1>
       <Divider></Divider>
-      <h3>Font Style</h3>
-      <p>Font Style</p>
+      <h3>Text Style</h3>
+      <p class="subtext">Font</p>
       <select 
+      className="selector-box"
       id="font-style" 
       name="font-style" 
       value={selectedFont}
@@ -112,15 +114,16 @@ function Teleprompter() {
         <option> Lucida Sans Unicode </option>                               
       </select>
 
-      <p>Font Color</p>
+      <p class="subtext">Font Color</p>
       <TwitterPicker
         color={selectedTextColor}
         onChange={(color) => {
           setSelectedTextColor(color.hex);
         }}
       ></TwitterPicker>
-      <p>Font Size</p>
+      <p class="subtext">Font Size</p>
       <input
+        className="input-box"
         type="number"
         name="text-size"
         id="text-size"
@@ -128,7 +131,7 @@ function Teleprompter() {
         onChange={(size) => {
           setSelectedFontSize(parseInt(size.target.value));
         }}
-      />
+      /><br></br><br></br>
       <Divider></Divider>
       <h3>Background Color</h3>
       <TwitterPicker
@@ -137,8 +140,10 @@ function Teleprompter() {
             setSelectedBackgroundColor(color.hex);
         }}
       ></TwitterPicker>
+      <br></br><br></br>
       <Divider></Divider>
       <h3>Window Opacity</h3>
+      {/* opacity scroller */}
       <input
         type="range"
         min="0"
@@ -147,9 +152,16 @@ function Teleprompter() {
         value={opacity}
         onChange={handleOpacityChange}
       />
+      <br></br><br></br>
+      {/* value */}
+      <div>
+        Value: {opacity}
+      </div>
+      <br></br>
     <Divider></Divider>
     <h3>Scroll Speed</h3>
     <input
+        className="input-box"
         type="number"
         name="scroll-speed"
         id="scroll-speed"

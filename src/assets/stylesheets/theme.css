@@ -27,7 +27,7 @@
 body, input, textarea{
     /*  Default styling */
     color: hsl(0, 0%, 30%);
-    font-family: 'Yantramanav', sans-serif;
+    font-family: 'Inter', sans-serif;
     
     /*  Global variable stylings */
     --SDsize: 1rem;
@@ -126,4 +126,31 @@ body, input, textarea{
 
 .pointer{
     cursor: pointer;
+}
+
+/* style of the drawer and its contents */
+.drawer-style {
+    margin: 15px;
+}
+
+.settings-text {
+    margin: 2px;
+    margin-bottom: 8px;
+}
+
+.subtext {
+    color: grey;
+}
+
+.selector-box {
+    border-radius: 5px;
+    height: 30px;
+    border-color: 1px solid grey;
+}
+
+.input-box {
+    border-radius: 5px;
+    height: 27px;
+    width: 60px;
+    border-color: 1px solid grey;
 }
