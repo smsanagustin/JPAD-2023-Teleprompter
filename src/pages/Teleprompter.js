@@ -48,9 +48,8 @@ function Teleprompter() {
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
   const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(50);
-  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
-    COLORS.BLACK
-  );
+  const [selectedBackgroundColor, setSelectedBackgroundColor] =
+    useState("#F5F5F5");
   const [opacity, setOpacity] = useState(1);
 
   const [showTeleprompter, setShowTeleprompter] = useState(false);
@@ -380,29 +379,37 @@ function Teleprompter() {
         >
           {/* Slideshow content */}
           {/* Add your slideshow content here */}
-          <div class="container" style={{position:"relative"}}>
-            <button class="sticky-button" style={{position: "fixed", zIndex: 999}} onClick={toggleTeleprompter}>
+          <div className="container" style={{ position: "relative" }}>
+            <button
+              className="sticky-button"
+              style={{ position: "fixed", zIndex: 999 }}
+              onClick={toggleTeleprompter}
+            >
               Back
             </button>
           </div>
 
-          <pre
-            style={{
-              fontFamily: selectedFont,
-              fontSize: selectedFontSize,
-              color: selectedTextColor,
-              backgroundColor: selectedBackgroundColor,
-              whiteSpace: "pre-wrap",
-              wordWrap: "break-word",
-            }}
-          >
-            {text}
-          </pre>
-          <div class="container" style={{position:"relative"}}>
-            <button class="sticky-button" style={{position: "fixed", bottom: 20,zIndex: 999}}>Play</button>
-            <button class="sticky-button" style={{position: "fixed", bottom: 20,left:"10%", zIndex: 999}}>Stop</button>
-          
+          <div className="text-container">
+            <pre
+              style={{
+                fontFamily: selectedFont,
+                fontSize: selectedFontSize,
+                color: selectedTextColor,
+                backgroundColor: selectedBackgroundColor,
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+            >
+              {text}
+            </pre>
           </div>
+
+          <div className="button-container">
+        <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>
+          <button className="sticky-button">Play</button>
+          <button className="sticky-button">Stop</button>
+        </div>
+      </div>
         </div>
       )}
     </div>
