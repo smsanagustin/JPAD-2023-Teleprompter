@@ -64,6 +64,14 @@ function Teleprompter() {
     setToggleStartOrPause(true)
   }
 
+  const handleStop = () => {
+    setToggleStartOrPause(true)
+    const container = document.querySelector(".fullscreen-page");
+  if (container) {
+    container.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  };
+
   const navigate = useNavigate();
 
   const defaultFontColors = [
@@ -117,6 +125,9 @@ function Teleprompter() {
   const toggleTeleprompter = () => {
     setShowTeleprompter(!showTeleprompter);
   };
+
+
+  
 
   const sidebarContent = (anchor) => (
     <Box
@@ -417,7 +428,7 @@ function Teleprompter() {
           <div className="button-container">
         <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>
           {toggleStartOrPause ? <button className="sticky-button" onClick={handlePlay}>Play</button> : <button className="sticky-button" onClick={handlePause}>Pause</button> }
-          <button className="sticky-button">Stop</button>
+          <button className="sticky-button" onClick={handleStop}>Stop</button>
         </div>
       </div>
         </div>
