@@ -22,11 +22,13 @@ import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 
 
+
 import React, { useState } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
 import ImageTextCard from "../components/ImageTextCard";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 
@@ -56,7 +58,7 @@ function Teleprompter() {
   );
   const [opacity, setOpacity] = useState(1);
 
-
+  const navigate = useNavigate();
 
 
   /* handles the changes when theres an input in the textarea */
@@ -87,6 +89,13 @@ function Teleprompter() {
     }
     setSideBar({ ...sidebar, [anchor]: open });
   };
+
+  const resetSettings = () => {
+    // setSelectedFont();
+    setSelectedTextColor("#000000");
+    setSelectedFontSize(12);
+    setSelectedBackgroundColor("#FFFFFF");
+  }
 
   const sidebarContent = (anchor) => (
     <Box
@@ -171,6 +180,7 @@ function Teleprompter() {
         }}
       />
     <p>Selected speed: {selectedScrollSpeed}</p>
+    <button onClick={resetSettings}>Reset</button>
     </Box>
   );
 
@@ -191,7 +201,7 @@ function Teleprompter() {
             <IconTextButton icon='magic_button' onClick = {() => {setModal(MODAL.writeWithAi)}} className = "margin-right-1 highlight-2 hover-highlight-2">Rewrite with AI</IconTextButton>,
             <IconTextButton icon='save' onClick = {() => {}}></IconTextButton>,
             <IconTextButton icon='palette' onClick = {toggleDrawer("right", true)}></IconTextButton>,
-            <IconTextButton icon='slideshow'></IconTextButton>
+            <IconTextButton icon='slideshow' onClick = {() => {navigate("/teleprompter-screen", {state: text})}}></IconTextButton>
           ]} //insert the array of components
         />
         <Center>
@@ -235,7 +245,7 @@ function Teleprompter() {
           //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
           tab == TAB_NAMES.teleprompter ? (
             <TeleprompterPageContent>
-              Current tab: "{tab}"
+              <pre style={{fontFamily: selectedFont, fontSize: selectedFontSize, color: selectedTextColor, backgroundColor: selectedBackgroundColor}}>{text}</pre>
 
               <Drawer
                 anchor="right"

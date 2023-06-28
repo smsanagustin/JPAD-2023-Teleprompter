@@ -5,6 +5,7 @@ import Teleprompter from './pages/Teleprompter';
 //import './assets/stylesheets/teleprompter.css'
 import './assets/stylesheets/theme.css'
 import './assets/stylesheets/components.css'
+import TeleprompterScreen from './pages/TeleprompterScreen';
 
 
 
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<ShowcaseComponents />} />
           <Route path="/teleprompter" element={<Teleprompter />} />
+          <Route exact path="/teleprompter-screen" element={<TeleprompterScreen />}/>
         </Routes>
       </>
     </Router>
