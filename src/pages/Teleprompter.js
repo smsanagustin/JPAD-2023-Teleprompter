@@ -19,7 +19,7 @@ import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
@@ -57,15 +57,18 @@ function Teleprompter() {
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
 
   const handlePlay = () => {
-    setToggleStartOrPause(false)
-  }
+    const container = document.querySelector(".fullscreen-page");
+    if (container && endOfScriptRef.current) {
+      endOfScriptRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handlePause = () => {
-    setToggleStartOrPause(true)
+    setToggleStartOrPause(true);
   }
 
   const handleStop = () => {
-    setToggleStartOrPause(true)
+    setToggleStartOrPause(true);
     const container = document.querySelector(".fullscreen-page");
   if (container) {
     container.scrollTo({ top: 0, behavior: "smooth" });
@@ -251,6 +254,8 @@ function Teleprompter() {
     </Box>
   );
 
+  const endOfScriptRef = useRef(null);
+
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page">
@@ -424,6 +429,8 @@ function Teleprompter() {
               {text}
             </pre>
           </div>
+          
+          <div ref={endOfScriptRef} />
 
           <div className="button-container">
         <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>
