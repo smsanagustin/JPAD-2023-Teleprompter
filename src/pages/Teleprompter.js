@@ -1,4 +1,3 @@
-
 import {
   TAB_NAMES,
   MODAL,
@@ -10,18 +9,15 @@ import {
   AI_REWRITE_OPTIONS,
 } from "../model/values";
 
-
 import AppIconText from "../components/AppIconText";
 import Center from "../components/Center";
 import TrainTabs from "../components/TrainTabs";
 import SplitContent from "../components/SplitContent";
 import IconTextButton from "../components/IconTextButton";
-import Modal from '../components/Modal';
+import Modal from "../components/Modal";
 import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
-
-
 
 import React, { useState } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
@@ -29,8 +25,8 @@ import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
 import ImageTextCard from "../components/ImageTextCard";
 import { useNavigate, useLocation } from "react-router-dom";
-
-
+import "../assets/stylesheets/fullscreen-page.css";
+import { right } from "@popperjs/core";
 
 function Teleprompter() {
   //  Add states as necessary **********************************************************************************
@@ -39,7 +35,6 @@ function Teleprompter() {
   const [tab, setTab] = useState(TAB_NAMES.defaultval);
   const [sidebar, setSideBar] = useState({ right: false });
   const [modal, setModal] = useState(MODAL.hidden);
- 
 
   //  ******************** [ DATA STATES ] ********************
   const [text, setText] = useState("");
@@ -58,6 +53,8 @@ function Teleprompter() {
   );
   const [opacity, setOpacity] = useState(1);
 
+  const [showTeleprompter, setShowTeleprompter] = useState(false);
+
   const navigate = useNavigate();
 
   const defaultFontColors = [
@@ -73,7 +70,6 @@ function Teleprompter() {
     "#800080", // Purple
   ];
 
-
   /* handles the changes when theres an input in the textarea */
   const handleTextChange = (event) => {
     const { value } = event.target;
@@ -86,9 +82,8 @@ function Teleprompter() {
     document.documentElement.style.opacity = opacity;
   };
 
-
   const handleFontChange = (event) => {
-    const {newFont} = event.target;
+    const { newFont } = event.target;
     setSelectedFont(newFont);
   };
 
@@ -108,32 +103,37 @@ function Teleprompter() {
     setSelectedTextColor("#000000");
     setSelectedFontSize(12);
     setSelectedBackgroundColor("#FFFFFF");
-  }
+  };
+
+  const toggleTeleprompter = () => {
+    setShowTeleprompter(!showTeleprompter);
+  };
 
   const sidebarContent = (anchor) => (
     <Box
-    class="drawer-style"
-    //   role="presentation"
-    //   onClick={toggleDrawer(anchor, false)}
-    //   onKeyDown={toggleDrawer(anchor, false)}
+      class="drawer-style"
+      //   role="presentation"
+      //   onClick={toggleDrawer(anchor, false)}
+      //   onKeyDown={toggleDrawer(anchor, false)}
     >
       {/* Add your drawer content here */}
       <h1 class="settings-text">Settings</h1>
       <Divider></Divider>
       <h3>Text Style</h3>
       <p class="subtext">Font</p>
-      <select 
-      className="selector-box"
-      id="font-style" 
-      name="font-style" 
-      value={selectedFont}
-      onChange={handleFontChange}>
+      <select
+        className="selector-box"
+        id="font-style"
+        name="font-style"
+        value={selectedFont}
+        onChange={handleFontChange}
+      >
         <option> Serif </option>
         <option> Arial </option>
-        <option> Sans-Serif </option>                                  
+        <option> Sans-Serif </option>
         <option> Tahoma </option>
         <option> Verdana </option>
-        <option> Lucida Sans Unicode </option>                               
+        <option> Lucida Sans Unicode </option>
       </select>
 
       <p class="subtext">Font Color</p>
@@ -141,20 +141,20 @@ function Teleprompter() {
         color={selectedTextColor}
         colors={defaultFontColors}
         styles={{
-            default: {
-              swatch: {
-                border: '1px solid #E6E6FA',
-                borderRadius: '4px',
-              },
+          default: {
+            swatch: {
+              border: "1px solid #E6E6FA",
+              borderRadius: "4px",
             },
-            transparent: {
-              swatch: {
-                border: '1px solid #E6E6FA',
-                borderRadius: '4px',
-                boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.5)',
-              },
+          },
+          transparent: {
+            swatch: {
+              border: "1px solid #E6E6FA",
+              borderRadius: "4px",
+              boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.5)",
             },
-          }}
+          },
+        }}
         onChange={(color) => {
           setSelectedTextColor(color.hex);
         }}
@@ -169,32 +169,35 @@ function Teleprompter() {
         onChange={(size) => {
           setSelectedFontSize(parseInt(size.target.value));
         }}
-      /><br></br><br></br>
+      />
+      <br></br>
+      <br></br>
       <Divider></Divider>
       <h3>Background Color</h3>
       <TwitterPicker
         color={selectedBackgroundColor}
         colors={defaultFontColors}
         styles={{
-            default: {
-              swatch: {
-                border: '1px solid #E6E6FA',
-                borderRadius: '4px',
-              },
+          default: {
+            swatch: {
+              border: "1px solid #E6E6FA",
+              borderRadius: "4px",
             },
-            transparent: {
-              swatch: {
-                border: '1px solid #E6E6FA',
-                borderRadius: '4px',
-                boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.5)',
-              },
+          },
+          transparent: {
+            swatch: {
+              border: "1px solid #E6E6FA",
+              borderRadius: "4px",
+              boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.5)",
             },
-          }}
+          },
+        }}
         onChange={(color) => {
-            setSelectedBackgroundColor(color.hex);
+          setSelectedBackgroundColor(color.hex);
         }}
       ></TwitterPicker>
-      <br></br><br></br>
+      <br></br>
+      <br></br>
       <Divider></Divider>
       <h3>Window Opacity</h3>
       {/* opacity scroller */}
@@ -206,15 +209,14 @@ function Teleprompter() {
         value={opacity}
         onChange={handleOpacityChange}
       />
-      <br></br><br></br>
-      {/* value */}
-      <div>
-        Value: {opacity}
-      </div>
       <br></br>
-    <Divider></Divider>
-    <h3>Scroll Speed</h3>
-    <input
+      <br></br>
+      {/* value */}
+      <div>Value: {opacity}</div>
+      <br></br>
+      <Divider></Divider>
+      <h3>Scroll Speed</h3>
+      <input
         className="input-box"
         type="number"
         name="scroll-speed"
@@ -224,103 +226,185 @@ function Teleprompter() {
           setSelectedScrollSpeed(parseInt(speed.target.value));
         }}
       />
-    <p>Selected speed: {selectedScrollSpeed}</p>
-    <button onClick={resetSettings}>Reset</button>
+      <p>Selected speed: {selectedScrollSpeed}</p>
+      <button onClick={resetSettings}>Reset</button>
     </Box>
   );
 
-
-
-
   //  edit to add functionalities
   return (
-    <div className="Teleprompter-Page" >
+    <div className="Teleprompter-Page">
       {/* renders the header part of the screen <Header/> */}
-      
 
       {/*  TeleprompterRibbon IS SIMILAR TO THE RIBBON OF GOOGLE FORMS*/}
       <TeleprompterRibbon>
         <SplitContent
-          left={[<AppIconText/>]} // insert the array of components
+          left={[<AppIconText />]} // insert the array of components
           right={[
-            <IconTextButton icon='magic_button' onClick = {() => {setModal(MODAL.writeWithAi)}} className = "margin-right-1 highlight-2 hover-highlight-2">Rewrite with AI</IconTextButton>,
-            <IconTextButton icon='save' onClick = {() => {}}></IconTextButton>,
-            <IconTextButton icon='palette' onClick = {toggleDrawer("right", true)}></IconTextButton>,
-            <IconTextButton icon='slideshow' onClick = {() => {navigate("/teleprompter-screen", {state: {script:text, font: selectedFont, fontsize: selectedFontSize, color: selectedTextColor, bg: selectedBackgroundColor, speed: selectedScrollSpeed}})}}></IconTextButton>
+            <IconTextButton
+              icon="magic_button"
+              onClick={() => {
+                setModal(MODAL.writeWithAi);
+              }}
+              className="margin-right-1 highlight-2 hover-highlight-2"
+            >
+              Rewrite with AI
+            </IconTextButton>,
+            <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
+            <IconTextButton
+              icon="palette"
+              onClick={toggleDrawer("right", true)}
+            ></IconTextButton>,
+            <IconTextButton
+              icon="slideshow"
+              onClick={toggleTeleprompter}
+            ></IconTextButton>,
           ]} //insert the array of components
         />
         <Center>
-          <TrainTabs tabs = {[
-            {tabname: TAB_NAMES.defaultval, /* has the same value as TAB_NAMES.write */
-            onClick: () => {setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */}, 
-            isSelected: TAB_NAMES.defaultval == tab,
-          },
+          <TrainTabs
+            tabs={[
+              {
+                tabname:
+                  TAB_NAMES.defaultval /* has the same value as TAB_NAMES.write */,
+                onClick: () => {
+                  setTab(TAB_NAMES.defaultval); /* SELECT THE "Write" tab */
+                },
+                isSelected: TAB_NAMES.defaultval == tab,
+              },
 
-            {tabname: TAB_NAMES.teleprompter,
-            onClick: () => {setTab(TAB_NAMES.teleprompter); /* SELECT THE "Teleprompter" tab */ },
-            isSelected: TAB_NAMES.teleprompter == tab,
-          },
-          ]}/>
+              {
+                tabname: TAB_NAMES.teleprompter,
+                onClick: () => {
+                  setTab(
+                    TAB_NAMES.teleprompter
+                  ); /* SELECT THE "Teleprompter" tab */
+                },
+                isSelected: TAB_NAMES.teleprompter == tab,
+              },
+            ]}
+          />
         </Center>
       </TeleprompterRibbon>
 
       {/* added divs to center the add-text section */}
 
+      {
+        //  SHOW THIS CONTENT IN THE BODY WHEN THE "Write" TAB IS SELECTED
+        tab == TAB_NAMES.write ? (
+          <TeleprompterPageContent>
+            <DocPage
+              value={text}
+              onChange={handleTextChange}
+              placeholder="Write your script"
+            ></DocPage>
 
-          {
-            //  SHOW THIS CONTENT IN THE BODY WHEN THE "Write" TAB IS SELECTED
-            tab == TAB_NAMES.write ? (
-              <TeleprompterPageContent>
-                <DocPage value={text} onChange={handleTextChange} placeholder="Write your script">
+            <Drawer
+              anchor="right"
+              open={sidebar["right"]}
+              onClose={toggleDrawer("right", false)}
+            >
+              {sidebarContent("right")}
+            </Drawer>
+          </TeleprompterPageContent>
+        ) : null
+      }
 
-                </DocPage>
+      {
+        //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
+        tab == TAB_NAMES.teleprompter ? (
+          <TeleprompterPageContent>
+            <pre
+              style={{
+                fontFamily: selectedFont,
+                fontSize: selectedFontSize,
+                color: selectedTextColor,
+                backgroundColor: selectedBackgroundColor,
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+            >
+              {text}
+            </pre>
 
-                <Drawer
-                  anchor="right"
-                  open={sidebar["right"]}
-                  onClose={toggleDrawer("right", false)}
-                >
-                  {sidebarContent("right")}
-                </Drawer>
-              </TeleprompterPageContent>
-            ) : null
-          }
+            <Drawer
+              anchor="right"
+              open={sidebar["right"]}
+              onClose={toggleDrawer("right", false)}
+            >
+              {sidebarContent("right")}
+            </Drawer>
+          </TeleprompterPageContent>
+        ) : null
+      }
 
-        {
-          //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
-          tab == TAB_NAMES.teleprompter ? (
-            
-            <TeleprompterPageContent>
-              <pre style={{fontFamily: selectedFont, fontSize: selectedFontSize, color: selectedTextColor, backgroundColor: selectedBackgroundColor, whiteSpace: 'pre-wrap',
-        wordWrap: 'break-word',}}>{text}</pre>
+      {modal == MODAL.writeWithAi ? (
+        <Modal
+          title={"Let AI rewrite your text"}
+          onClose={() => {
+            setModal(MODAL.hidden);
+          }}
+        >
+          {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
+            <ImageTextCard
+              image={option.title}
+              title={option.image}
+              description={option.description}
+            />
+          ))}
+        </Modal>
+      ) : null}
 
-              <Drawer
-                anchor="right"
-                open={sidebar["right"]}
-                onClose={toggleDrawer("right", false)}
-              >
-                {sidebarContent("right")}
-              </Drawer>
-            </TeleprompterPageContent>
-          ) : null
-        }
+      {/* {showTeleprompter  ? (
+        <div className="fullscreen-page" style={{ backgroundColor: "#FFFFFF" }}>
+          <pre
+            style={{
+              fontFamily: selectedFont,
+              fontSize: selectedFontSize,
+              color: selectedTextColor,
+              backgroundColor: selectedBackgroundColor,
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+            }}
+          >
+            {text}
+          </pre>
+          <button onClick={() => {setShowTeleprompter(false)}}>Back</button>
+        </div>
+      ) : null} */}
 
-        {
-          modal == MODAL.writeWithAi
-            ? <Modal title={'Let AI rewrite your text'} onClose={() => {setModal(MODAL.hidden)}}>
-                {
-                  Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
-                    <ImageTextCard
-                      image = {option.title}
-                      title = {option.image}
-                      description = {option.description}
-                    />
-                  ))
-                }
-              </Modal>
-            : null
-        }
+      {showTeleprompter && (
+        <div
+          className="fullscreen-page"
+          style={{ backgroundColor: selectedBackgroundColor }}
+        >
+          {/* Slideshow content */}
+          {/* Add your slideshow content here */}
+          <div class="container" style={{position:"relative"}}>
+            <button class="sticky-button" style={{position: "fixed", zIndex: 999}} onClick={toggleTeleprompter}>
+              Back
+            </button>
+          </div>
 
+          <pre
+            style={{
+              fontFamily: selectedFont,
+              fontSize: selectedFontSize,
+              color: selectedTextColor,
+              backgroundColor: selectedBackgroundColor,
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+            }}
+          >
+            {text}
+          </pre>
+          <div class="container" style={{position:"relative"}}>
+            <button class="sticky-button" style={{position: "fixed", bottom: 20,zIndex: 999}}>Play</button>
+            <button class="sticky-button" style={{position: "fixed", bottom: 20,left:"10%", zIndex: 999}}>Stop</button>
+          
+          </div>
+        </div>
+      )}
     </div>
   );
 }
