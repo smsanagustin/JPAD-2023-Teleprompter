@@ -60,6 +60,19 @@ function Teleprompter() {
 
   const navigate = useNavigate();
 
+  const defaultFontColors = [
+    "#000000", // Black
+    "#FFFFFF", // White
+    "#FF0000", // Red
+    "#00FF00", // Green
+    "#0000FF", // Blue
+    "#FFFF00", // Yellow
+    "#FF00FF", // Magenta
+    "#00FFFF", // Cyan
+    "#FFA500", // Orange
+    "#800080", // Purple
+  ];
+
 
   /* handles the changes when theres an input in the textarea */
   const handleTextChange = (event) => {
@@ -126,6 +139,22 @@ function Teleprompter() {
       <p class="subtext">Font Color</p>
       <TwitterPicker
         color={selectedTextColor}
+        colors={defaultFontColors}
+        styles={{
+            default: {
+              swatch: {
+                border: '1px solid #E6E6FA',
+                borderRadius: '4px',
+              },
+            },
+            transparent: {
+              swatch: {
+                border: '1px solid #E6E6FA',
+                borderRadius: '4px',
+                boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.5)',
+              },
+            },
+          }}
         onChange={(color) => {
           setSelectedTextColor(color.hex);
         }}
@@ -145,6 +174,22 @@ function Teleprompter() {
       <h3>Background Color</h3>
       <TwitterPicker
         color={selectedBackgroundColor}
+        colors={defaultFontColors}
+        styles={{
+            default: {
+              swatch: {
+                border: '1px solid #E6E6FA',
+                borderRadius: '4px',
+              },
+            },
+            transparent: {
+              swatch: {
+                border: '1px solid #E6E6FA',
+                borderRadius: '4px',
+                boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.5)',
+              },
+            },
+          }}
         onChange={(color) => {
             setSelectedBackgroundColor(color.hex);
         }}
@@ -244,6 +289,7 @@ function Teleprompter() {
         {
           //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
           tab == TAB_NAMES.teleprompter ? (
+            
             <TeleprompterPageContent>
               <pre style={{fontFamily: selectedFont, fontSize: selectedFontSize, color: selectedTextColor, backgroundColor: selectedBackgroundColor, whiteSpace: 'pre-wrap',
         wordWrap: 'break-word',}}>{text}</pre>
