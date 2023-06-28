@@ -450,5 +450,7 @@ export default Teleprompter;
 /* REFERENCES
 - Textarea: https://react.dev/reference/react-dom/components/textarea
 - Drawer/Sidebar: https://mui.com/material-ui/react-drawer/
+- Scronll to top: https://www.youtube.com/watch?v=pKbNCWb6USQ
+- Scroll to bottom: https://www.youtube.com/watch?v=27jInSXXbqk
 
 */
