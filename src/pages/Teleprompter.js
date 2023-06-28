@@ -243,7 +243,8 @@ function Teleprompter() {
           //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
           tab == TAB_NAMES.teleprompter ? (
             <TeleprompterPageContent>
-              <pre style={{fontFamily: selectedFont, fontSize: selectedFontSize, color: selectedTextColor, backgroundColor: selectedBackgroundColor}}>{text}</pre>
+              <pre style={{fontFamily: selectedFont, fontSize: selectedFontSize, color: selectedTextColor, backgroundColor: selectedBackgroundColor, whiteSpace: 'pre-wrap',
+        wordWrap: 'break-word',}}>{text}</pre>
 
               <Drawer
                 anchor="right"
