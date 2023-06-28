@@ -54,6 +54,16 @@ function Teleprompter() {
 
   const [showTeleprompter, setShowTeleprompter] = useState(false);
 
+  const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
+
+  const handlePlay = () => {
+    setToggleStartOrPause(false)
+  }
+
+  const handlePause = () => {
+    setToggleStartOrPause(true)
+  }
+
   const navigate = useNavigate();
 
   const defaultFontColors = [
@@ -406,7 +416,7 @@ function Teleprompter() {
 
           <div className="button-container">
         <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>
-          <button className="sticky-button">Play</button>
+          {toggleStartOrPause ? <button className="sticky-button" onClick={handlePlay}>Play</button> : <button className="sticky-button" onClick={handlePause}>Pause</button> }
           <button className="sticky-button">Stop</button>
         </div>
       </div>
