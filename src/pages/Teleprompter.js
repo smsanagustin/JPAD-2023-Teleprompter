@@ -201,7 +201,7 @@ function Teleprompter() {
             <IconTextButton icon='magic_button' onClick = {() => {setModal(MODAL.writeWithAi)}} className = "margin-right-1 highlight-2 hover-highlight-2">Rewrite with AI</IconTextButton>,
             <IconTextButton icon='save' onClick = {() => {}}></IconTextButton>,
             <IconTextButton icon='palette' onClick = {toggleDrawer("right", true)}></IconTextButton>,
-            <IconTextButton icon='slideshow' onClick = {() => {navigate("/teleprompter-screen", {state: text})}}></IconTextButton>
+            <IconTextButton icon='slideshow' onClick = {() => {navigate("/teleprompter-screen", {state: {script:text, font: selectedFont, fontsize: selectedFontSize, color: selectedTextColor, bg: selectedBackgroundColor, speed: selectedScrollSpeed}})}}></IconTextButton>
           ]} //insert the array of components
         />
         <Center>
