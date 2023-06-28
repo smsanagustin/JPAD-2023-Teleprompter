@@ -57,6 +57,7 @@ function Teleprompter() {
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
 
   const handlePlay = () => {
+    setToggleStartOrPause(false);
     const container = document.querySelector(".fullscreen-page");
     if (container && endOfScriptRef.current) {
       endOfScriptRef.current.scrollIntoView({ behavior: "smooth" });
