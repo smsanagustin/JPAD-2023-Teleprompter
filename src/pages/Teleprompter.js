@@ -73,12 +73,6 @@ function Teleprompter() {
     document.documentElement.style.opacity = opacity;
   };
 
-
-  const handleFontChange = (event) => {
-    const {newFont} = event.target;
-    setSelectedFont(newFont);
-  };
-
   /* depending on the key/mouse pressed it would open/close the sidebar */
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -91,7 +85,7 @@ function Teleprompter() {
   };
 
   const resetSettings = () => {
-    // setSelectedFont();
+    setSelectedFont();
     setSelectedTextColor("#000000");
     setSelectedFontSize(12);
     setSelectedBackgroundColor("#FFFFFF");
@@ -109,18 +103,22 @@ function Teleprompter() {
       <Divider></Divider>
       <h3>Text Style</h3>
       <p class="subtext">Font</p>
+
       <select 
       className="selector-box"
       id="font-style" 
       name="font-style" 
       value={selectedFont}
-      onChange={handleFontChange}>
-        <option> Serif </option>
-        <option> Arial </option>
-        <option> Sans-Serif </option>                                  
-        <option> Tahoma </option>
-        <option> Verdana </option>
-        <option> Lucida Sans Unicode </option>                               
+      onChange={(font) => {
+        setSelectedFont(font.target.value)
+      }}>
+        <option value = "Serif"> Serif </option>
+        <option value = "Arial"> Arial </option>
+        <option value = "Sans-Serif"> Sans-Serif </option>                                  
+        <option value = "Tahoma"> Tahoma </option>
+        <option value = "Verdana"> Verdana </option>
+        <option value = "Times New Roman"> Times New Roman </option>
+        <option value = "Lucida Sans Unicode"> Lucida Sans Unicode </option>                               
       </select>
 
       <p class="subtext">Font Color</p>
