@@ -11,7 +11,7 @@ export default function TeleprompterScreen() {
         <>
             <p>Teleprompter Screen</p>
             <button onClick={() => navigate(-1)}>Back</button>
-            <pre style={{ color: state.color, background: state.bg, fontSize: state.fontsize,}}>{state.script}</pre>
+            <pre style={{fontFamily: state.fontFamily, color: state.color, background: state.bg, fontSize: state.fontsize,}}>{state.script}</pre>
             <button>start</button>
             <button>pause</button>
             <button>stop</button>
