@@ -12,15 +12,3 @@
     overflow: auto;
   }
 
-
-  /* TO MAKE THE BUTTON STICK TO THE PAGE */
-  /* .container {
-    position: relative;
-  }
-  
-  .sticky-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 999;
-  } */

@@ -102,7 +102,7 @@ function Teleprompter() {
     // setSelectedFont();
     setSelectedTextColor("#000000");
     setSelectedFontSize(12);
-    setSelectedBackgroundColor("#FFFFFF");
+    setSelectedBackgroundColor("#F5F5F5");
   };
 
   const toggleTeleprompter = () => {
@@ -143,13 +143,13 @@ function Teleprompter() {
         styles={{
           default: {
             swatch: {
-              border: "1px solid #E6E6FA",
+              border: "1px solid whitesmoke",
               borderRadius: "4px",
             },
           },
           transparent: {
             swatch: {
-              border: "1px solid #E6E6FA",
+              border: "1px solid whitesmoke",
               borderRadius: "4px",
               boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.5)",
             },
@@ -313,7 +313,7 @@ function Teleprompter() {
       {
         //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
         tab == TAB_NAMES.teleprompter ? (
-          <TeleprompterPageContent>
+          <TeleprompterPageContent bg={selectedBackgroundColor}>
             <pre
               style={{
                 fontFamily: selectedFont,
