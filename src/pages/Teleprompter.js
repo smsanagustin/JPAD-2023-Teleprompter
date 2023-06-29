@@ -30,7 +30,6 @@ import { right } from "@popperjs/core";
 
 function Teleprompter() {
   //  Add states as necessary **********************************************************************************
-
   //  ******************** [ STRUCTURAL STATES ] ********************
   const [tab, setTab] = useState(TAB_NAMES.defaultval);
   const [sidebar, setSideBar] = useState({ right: false });
@@ -40,6 +39,7 @@ function Teleprompter() {
   const [text, setText] = useState("");
   const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
   const [position, setPosition] = useState(0);
+
   const [scrollSpeed, setScrollSpeed] = useState(
     SCROLL_SPEED_LIMITS.defaultval
   );
@@ -71,9 +71,9 @@ function Teleprompter() {
   const handleStop = () => {
     setToggleStartOrPause(true);
     const container = document.querySelector(".fullscreen-page");
-  if (container) {
-    container.scrollTo({ top: 0, behavior: "smooth" });
-  }
+    if (container) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const navigate = useNavigate();
