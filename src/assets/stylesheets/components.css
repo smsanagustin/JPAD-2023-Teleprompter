@@ -73,7 +73,6 @@
     padding: calc(2 * var(--SDsize));
     display: flex;
     justify-content: center;
-
 }
 
 .DocPage textarea{
@@ -82,6 +81,8 @@
     padding: var(--page-margin);
     width: calc(var(--page-width-letter) - var(--page-margin) * 2);
     height: calc(var(--page-height-letter) - var(--page-margin) * 2);;   /*  THIS IS THE SIZE OF 11 inches*/
+
+    font-size: 1rem; /* 1 rem is used here because SDsize is only for spacing, positioning and shape sizing*/
 }
 
 
@@ -207,6 +208,7 @@
 
     border-radius: calc(0.5 * var(--SDsize));
 
+    cursor: pointer;
     font-style: normal;
 
 }

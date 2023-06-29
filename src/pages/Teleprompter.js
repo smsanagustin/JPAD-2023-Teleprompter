@@ -19,7 +19,7 @@ import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
@@ -48,12 +48,33 @@ function Teleprompter() {
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
   const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(50);
-  const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
-    COLORS.BLACK
-  );
+  const [selectedBackgroundColor, setSelectedBackgroundColor] =
+    useState("#F5F5F5");
   const [opacity, setOpacity] = useState(1);
 
   const [showTeleprompter, setShowTeleprompter] = useState(false);
+
+  const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
+
+  const handlePlay = () => {
+    setToggleStartOrPause(false);
+    const container = document.querySelector(".fullscreen-page");
+    if (container && endOfScriptRef.current) {
+      endOfScriptRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handlePause = () => {
+    setToggleStartOrPause(true);
+  }
+
+  const handleStop = () => {
+    setToggleStartOrPause(true);
+    const container = document.querySelector(".fullscreen-page");
+  if (container) {
+    container.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  };
 
   const navigate = useNavigate();
 
@@ -82,6 +103,7 @@ function Teleprompter() {
     document.documentElement.style.opacity = opacity;
   };
 
+
   /* depending on the key/mouse pressed it would open/close the sidebar */
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -94,15 +116,18 @@ function Teleprompter() {
   };
 
   const resetSettings = () => {
-    setSelectedFont();
+    setSelectedFont("Serif");
     setSelectedTextColor("#000000");
     setSelectedFontSize(12);
-    setSelectedBackgroundColor("#FFFFFF");
+    setSelectedBackgroundColor("#F5F5F5");
   };
 
   const toggleTeleprompter = () => {
     setShowTeleprompter(!showTeleprompter);
   };
+
+
+  
 
   const sidebarContent = (anchor) => (
     <Box
@@ -141,13 +166,13 @@ function Teleprompter() {
         styles={{
           default: {
             swatch: {
-              border: "1px solid #E6E6FA",
+              border: "1px solid whitesmoke",
               borderRadius: "4px",
             },
           },
           transparent: {
             swatch: {
-              border: "1px solid #E6E6FA",
+              border: "1px solid whitesmoke",
               borderRadius: "4px",
               boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.5)",
             },
@@ -229,6 +254,8 @@ function Teleprompter() {
     </Box>
   );
 
+  const endOfScriptRef = useRef(null);
+
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page">
@@ -239,16 +266,16 @@ function Teleprompter() {
         <SplitContent
           left={[<AppIconText />]} // insert the array of components
           right={[
-            <IconTextButton
-              icon="magic_button"
-              onClick={() => {
-                setModal(MODAL.writeWithAi);
-              }}
-              className="margin-right-1 highlight-2 hover-highlight-2"
-            >
-              Rewrite with AI
-            </IconTextButton>,
-            <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
+            // <IconTextButton
+            //   icon="magic_button"
+            //   onClick={() => {
+            //     setModal(MODAL.writeWithAi);
+            //   }}
+            //   className="margin-right-1 highlight-2 hover-highlight-2"
+            // >
+            //   Rewrite with AI
+            // </IconTextButton>,
+            // <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
             <IconTextButton
               icon="palette"
               onClick={toggleDrawer("right", true)}
@@ -311,7 +338,7 @@ function Teleprompter() {
       {
         //  SHOW THIS CONTENT IN THE BODY WHEN THE "Teleprompter" TAB IS SELECTED
         tab == TAB_NAMES.teleprompter ? (
-          <TeleprompterPageContent>
+          <TeleprompterPageContent bg={selectedBackgroundColor}>
             <pre
               style={{
                 fontFamily: selectedFont,
@@ -378,32 +405,42 @@ function Teleprompter() {
         >
           {/* Slideshow content */}
           {/* Add your slideshow content here */}
-          <div class="container" style={{position:"relative"}}>
-            <button class="sticky-button" style={{position: "fixed", zIndex: 999}} onClick={toggleTeleprompter}>
+          <div className="container" style={{ position: "relative" }}>
+            <button
+              className="sticky-button"
+              style={{ position: "fixed", zIndex: 999 }}
+              onClick={toggleTeleprompter}
+            >
               Back
             </button>
           </div>
           <script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
 
-          <marquee direction = "up" id="marquee">
-          <pre
-            style={{
-              fontFamily: selectedFont,
-              fontSize: selectedFontSize,
-              color: selectedTextColor,
-              backgroundColor: selectedBackgroundColor,
-              whiteSpace: "pre-wrap",
-              wordWrap: "break-word",
-            }}
-          >
-            {text}
-          </pre>
-          </marquee>
-          <div class="container" style={{position:"relative"}}>
-          <button class="sticky-button" style={{position: "fixed", bottom: 20,zIndex: 999}}>Play</button>
-          <button class="sticky-button" style={{position: "fixed", bottom: 20,left:"10%", zIndex: 999}}>Stop</button>
-          
+          <marquee direction= "up" id="marquee"> {/* Temporary placeholder for scrolling*/}
+          <div className="text-container">
+            <pre
+              style={{
+                fontFamily: selectedFont,
+                fontSize: selectedFontSize,
+                color: selectedTextColor,
+                backgroundColor: selectedBackgroundColor,
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+            >
+              {text}
+            </pre>
           </div>
+          </marquee>
+          
+          <div ref={endOfScriptRef} />
+
+          <div className="button-container">
+        <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>
+          {toggleStartOrPause ? <button className="sticky-button" onClick={handlePlay}>Play</button> : <button className="sticky-button" onClick={handlePause}>Pause</button> }
+          <button className="sticky-button" onClick={handleStop}>Stop</button>
+        </div>
+      </div>
         </div>
       )}
     </div>
@@ -415,5 +452,7 @@ export default Teleprompter;
 /* REFERENCES
 - Textarea: https://react.dev/reference/react-dom/components/textarea
 - Drawer/Sidebar: https://mui.com/material-ui/react-drawer/
+- Scronll to top: https://www.youtube.com/watch?v=pKbNCWb6USQ
+- Scroll to bottom: https://www.youtube.com/watch?v=27jInSXXbqk
 
 */
