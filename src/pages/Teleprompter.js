@@ -266,16 +266,16 @@ function Teleprompter() {
         <SplitContent
           left={[<AppIconText />]} // insert the array of components
           right={[
-            <IconTextButton
-              icon="magic_button"
-              onClick={() => {
-                setModal(MODAL.writeWithAi);
-              }}
-              className="margin-right-1 highlight-2 hover-highlight-2"
-            >
-              Rewrite with AI
-            </IconTextButton>,
-            <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
+            // <IconTextButton
+            //   icon="magic_button"
+            //   onClick={() => {
+            //     setModal(MODAL.writeWithAi);
+            //   }}
+            //   className="margin-right-1 highlight-2 hover-highlight-2"
+            // >
+            //   Rewrite with AI
+            // </IconTextButton>,
+            // <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
             <IconTextButton
               icon="palette"
               onClick={toggleDrawer("right", true)}
