@@ -250,7 +250,9 @@ function Teleprompter() {
         }}
       />
       <p>Selected speed: {selectedScrollSpeed}</p>
-      <button onClick={resetSettings}>Reset</button>
+      <Divider></Divider>
+      <br></br>
+      <button className="reset-button" onClick={resetSettings}>Reset Settings</button>
     </Box>
   );
 

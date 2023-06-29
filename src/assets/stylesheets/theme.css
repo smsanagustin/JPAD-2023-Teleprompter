@@ -158,3 +158,18 @@ body, input, textarea{
     width: 60px;
     border-color: 1px solid grey;
 }
+
+.reset-button {
+    height: 35px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    color: hsl(253, 86%, 53%);
+}
+
+.reset-button:hover {
+    background-color: hsl(253, 86%, 53%);
+    color: white;
+    border: none;
+}
