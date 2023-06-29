@@ -415,6 +415,7 @@ function Teleprompter() {
             </button>
           </div>
 
+          <marquee direction= "up"> {/* Temporary placeholder for scrolling*/}
           <div className="text-container">
             <pre
               style={{
@@ -429,6 +430,7 @@ function Teleprompter() {
               {text}
             </pre>
           </div>
+          </marquee>
           
           <div ref={endOfScriptRef} />
 
