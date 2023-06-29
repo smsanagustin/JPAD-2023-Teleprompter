@@ -15,10 +15,10 @@ export default function TeleprompterScreen() {
         <div style={rootStyle}>
             <p>Teleprompter Screen</p>
             <button onClick={() => navigate(-1)}>Back</button>
-            <pre style={{ color: state.color, fontSize: state.fontsize, whiteSpace: 'pre-wrap',
-        wordWrap: 'break-word'}}>{state.script}</pre>
+            <marquee direction= "up" id="teleprompter"><pre style={{fontFamily: state.fontFamily, color: state.color, background: state.bg, fontSize: state.fontsize,}}>{state.script}</pre>
+            </marquee>
             <button>start</button>
-            <button>pause</button>
+            <button >pause</button>
             <button>stop</button>
         </div>
     );
