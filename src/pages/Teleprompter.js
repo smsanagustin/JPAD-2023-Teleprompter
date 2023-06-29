@@ -47,7 +47,7 @@ function Teleprompter() {
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
-  const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(50);
+  const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(1);
   const [selectedBackgroundColor, setSelectedBackgroundColor] =
     useState("#F5F5F5");
   const [opacity, setOpacity] = useState(1);
@@ -71,7 +71,7 @@ function Teleprompter() {
     setRunner(
       setInterval(() => {
         if (telepromptContent.current != null) {
-          telepromptContent.current.scrollTop += 2;
+          telepromptContent.current.scrollTop += selectedScrollSpeed;
         }
       }, 10)
     )
@@ -256,6 +256,7 @@ function Teleprompter() {
       <input
         className="input-box"
         type="number"
+        max={10}
         name="scroll-speed"
         id="scroll-speed"
         value={selectedScrollSpeed}
