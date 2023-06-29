@@ -383,8 +383,9 @@ function Teleprompter() {
               Back
             </button>
           </div>
+          <script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
 
-          <marquee direction = "up">
+          <marquee direction = "up" id="marquee">
           <pre
             style={{
               fontFamily: selectedFont,
@@ -398,8 +399,8 @@ function Teleprompter() {
             {text}
           </pre>
           </marquee>
-          
           <div class="container" style={{position:"relative"}}>
+          <button class="sticky-button" style={{position: "fixed", bottom: 20,zIndex: 999}}>Play</button>
           <button class="sticky-button" style={{position: "fixed", bottom: 20,left:"10%", zIndex: 999}}>Stop</button>
           
           </div>
