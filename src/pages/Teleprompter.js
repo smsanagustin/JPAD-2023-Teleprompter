@@ -8,6 +8,7 @@ import {
   COLORS,
   AI_REWRITE_OPTIONS,
 } from "../model/values";
+import useAI from "../model/ai";
 
 import AppIconText from "../components/AppIconText";
 import Center from "../components/Center";
@@ -38,6 +39,9 @@ function Teleprompter() {
 
   //  ******************** [ DATA STATES ] ********************
   const [text, setText] = useState("");
+  const [response, rewrite] = useAI();
+  const [rewriteText, setRewriteText] = useState("");
+
   const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
   const [position, setPosition] = useState(0);
   const [scrollSpeed, setScrollSpeed] = useState(
@@ -55,6 +59,16 @@ function Teleprompter() {
   const [showTeleprompter, setShowTeleprompter] = useState(false);
 
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
+
+
+  const handleRewrite = async (input, instruction) => {
+    setRewriteText('');
+  
+    await rewrite(input, instruction);
+  
+    setRewriteText(response.message);
+  };
+  
 
   const handlePlay = () => {
     setToggleStartOrPause(false);
@@ -372,9 +386,10 @@ function Teleprompter() {
         >
           {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
             <ImageTextCard
-              image={option.title}
-              title={option.image}
-              description={option.description}
+              image = {option.title}
+              title = {option.image}
+              subtitle = {option.description}
+              onClick = {handleRewrite}
             />
           ))}
         </Modal>

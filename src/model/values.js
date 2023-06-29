@@ -42,12 +42,66 @@ const COLORS = {
 };
 
 const AI_REWRITE_OPTIONS = {
-    'asd': {
-        title: '',
+    'poem': {
+        title: 'Poem',
         image: <img src = ''/>,
-        description: ''
-    }
+        description: 'Poem desc.',
+        prompt: ''
+    },
+    'conversational': {
+        title: 'Conversational',
+        image: <img src = ''/>,
+        description: 'Conversational desc',
+        prompt: ''
+    },
+    'newsAnchor': {
+        title: 'News Anchor',
+        image: <img src = ''/>,
+        description: 'News Anchor desc',
+        prompt: ''
+    },
+    'funny': {
+        title: 'Funny',
+        image: <img src = ''/>,
+        description: 'Funny desc',
+        prompt: ''
+    },
+    'promotional': {
+        title: 'Promotional',
+        image: <img src = ''/>,
+        description: 'Promotional desc',
+        prompt: ''
+    },
+    'storytelling': {
+        title: 'Storytelling',
+        image: <img src = ''/>,
+        description: 'Storytelling desc',
+        prompt: ''
+    },
+    'informative': {
+        title: 'Informative',
+        image: <img src = ''/>,
+        description: 'Informative desc',
+        prompt: ''
+    },
+    'inspirational': {
+        title: 'Inspirational',
+        image: <img src = ''/>,
+        description: 'Inspirational desc',
+        prompt: ''
+    },
+    'analytical': {
+        title: 'Analytical',
+        image: <img src = ''/>,
+        description: 'Analytical desc',
+        prompt: ''
+    },
+    'persuasive': {
+        title: 'Persuasive',
+        image: <img src = ''/>,
+        description: 'Persuasive desc',
+        prompt: ''
+    },
 }
-
 
 export {TAB_NAMES, MODAL, MODES, FONT_SIZE_LIMITS, SCROLL_SPEED_LIMITS, FONTS, COLORS, AI_REWRITE_OPTIONS}

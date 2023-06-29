@@ -1,4 +1,5 @@
 import React from 'react';
+import TextOverlay from './TextOverlay'
 
 
 function ImageTextCard(props){
@@ -7,13 +8,15 @@ function ImageTextCard(props){
     const children = props.children;
     const image = props.image;
     const title = props.title;
+    const subtitle = props.subtitle;
     const onClick = props.onClick;
 
-    return <div className='ImageTextCard' onClick={onClick}>
+    return <div className='ImageTextCard hover-background-highlight-light gray1'>
         {image}
         <span className='title'>{title}</span>
         {/* EDIT THE LAYOUT BELOW */}
         {children}
+        <TextOverlay onClick={onClick}>{subtitle}</TextOverlay>
     </div>
 }
 export default ImageTextCard;

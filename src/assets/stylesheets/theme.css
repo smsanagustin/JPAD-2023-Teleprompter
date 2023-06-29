@@ -33,6 +33,10 @@ body, input, textarea{
     --SDsize: 1rem;
     --accent-color: hsl(253, 86%, 53%);
     --accent-color-1: hsl(253, 86%, 66%);
+    --accent-color-3: hsl(253, 80%, 97%);
+
+    /*  Colors with opacity*/
+    --accent-color-opaque-50: hsl(253, 86%, 53%, 0.5);
 
     --gray0: hsl(0, 0%, 98%);
     --gray1: hsl(0, 0%, 95%);
@@ -78,25 +82,9 @@ body, input, textarea{
     background-color: white;
 }
 
-.white{
-    background-color: white;
-}
-
-.opaque-black-50{
-    background-color: hsla(0, 0%, 0%, 0.5);
-}
-.opaque-white-50{
-    background-color: hsla(0, 0%, 100%, 0.5);
-}
 
 
-.hover-gray:hover{
-    background-color: var(--gray2);
-}
 
-.hover-content-highlight:hover{
-    color: var(--accent-color);
-}
 
 .highlight-1{
     background-color: whitesmoke;
@@ -107,10 +95,63 @@ body, input, textarea{
     background-color: var(--accent-color);
     color: white;
 }
+
+
+
+
+
+.white{
+    background-color: white;
+}
+
+.gray1{
+    background-color: var(--gray1);
+}
+
+.opaque-black-50{
+    background-color: hsla(0, 0%, 0%, 0.5);
+}
+.opaque-white-50{
+    background-color: hsla(0, 0%, 100%, 0.5);
+}
+
+.opque-highlight-50{
+    background-color: var(--accent-color-opaque-50);
+}
+
+
+
+
+
+.hover-gray:hover{
+    background-color: var(--gray2);
+}
+
+.hover-background-highlight-light:hover{
+    background-color: var(--accent-color-3);
+}
+
+.hover-content-highlight:hover{
+    color: var(--accent-color);
+}
+
 .hover-highlight-2:hover{
     background-color: var(--accent-color-1);
     color: white;
 }
+
+.appear-on-hover{
+    opacity: 0;
+
+    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.appear-on-hover:hover{
+    opacity: 1;
+}
+
+
+
 
 
 .shadow-large {

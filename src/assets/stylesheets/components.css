@@ -127,6 +127,20 @@
 
 
 
+/*  COMPONENT ****************************** [ ImageTextCard ] ****************************** */
+
+.ImageTextCard{
+    position: relative;
+
+    padding: calc(1 * var(--SDsize));
+    border-radius: calc(1 * var(--SDsize));
+    min-width: calc(5 * var(--SDsize));
+    min-height: calc(5 * var(--SDsize));
+
+    overflow: hidden;
+}
+
+
 /*  COMPONENT ****************************** [ Modal ] ****************************** */
 
 .Modal{
@@ -143,9 +157,20 @@
 }
 
 .Modal .large-container{
+    position: relative;
     max-width: var(--max-container-width);
+    max-height: 75vh;
     border-radius: calc(1 * var(--SDsize));
+    display: flex;
+    flex-direction: column;
 }
+
+.Modal .large-container .body{
+    overflow-y: scroll;
+    flex: 1;
+}
+
+
 
 .Modal .header .left{
     display: flex;
@@ -184,6 +209,26 @@
     width:  calc(var(--page-width-letter) - var(--SDsize));
 
     border-radius: calc(var(--SDsize));
+}
+
+
+
+/*  COMPONENT ****************************** [ TextOverlay ] ****************************** */
+
+.TextOverlay{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    --padding: calc(1 * var(--SDsize));
+    padding: var(--padding);
+    height: calc(100% - 2 * var(--padding));
+    width: calc(100% - 2 * var(--padding));
+
+    align-items: center;
+
+    font-size: 0.8rem;
 }
 
 
