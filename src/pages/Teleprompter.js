@@ -116,7 +116,7 @@ function Teleprompter() {
   };
 
   const resetSettings = () => {
-    setSelectedFont();
+    setSelectedFont("Serif");
     setSelectedTextColor("#000000");
     setSelectedFontSize(12);
     setSelectedBackgroundColor("#F5F5F5");
