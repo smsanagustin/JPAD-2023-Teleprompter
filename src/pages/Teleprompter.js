@@ -30,7 +30,6 @@ import { right } from "@popperjs/core";
 
 function Teleprompter() {
   //  Add states as necessary **********************************************************************************
-
   //  ******************** [ STRUCTURAL STATES ] ********************
   const [tab, setTab] = useState(TAB_NAMES.defaultval);
   const [sidebar, setSideBar] = useState({ right: false });
@@ -40,6 +39,7 @@ function Teleprompter() {
   const [text, setText] = useState("");
   const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
   const [position, setPosition] = useState(0);
+
   const [scrollSpeed, setScrollSpeed] = useState(
     SCROLL_SPEED_LIMITS.defaultval
   );
@@ -47,7 +47,7 @@ function Teleprompter() {
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
   const [selectedFontSize, setSelectedFontSize] = useState(12);
-  const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(50);
+  const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(1);
   const [selectedBackgroundColor, setSelectedBackgroundColor] =
     useState("#F5F5F5");
   const [opacity, setOpacity] = useState(1);
@@ -56,24 +56,38 @@ function Teleprompter() {
 
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
 
+  // used for scrolling
+  const [runner, setRunner] = useState(null);
+  const telepromptContent = useRef(null); // initialize ref
+
   const handlePlay = () => {
     setToggleStartOrPause(false);
-    const container = document.querySelector(".fullscreen-page");
-    if (container && endOfScriptRef.current) {
-      endOfScriptRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    // const container = document.querySelector(".fullscreen-page");
+    // if (container && endOfScriptRef.current) {
+    //   endOfScriptRef.current.scrollIntoView({ behavior: "smooth" });
+    // }
+
+    clearInterval(runner);
+    setRunner(
+      setInterval(() => {
+        if (telepromptContent.current != null) {
+          telepromptContent.current.scrollTop += selectedScrollSpeed;
+        }
+      }, 10)
+    )
   };
 
   const handlePause = () => {
     setToggleStartOrPause(true);
+    clearInterval(runner);
   }
 
   const handleStop = () => {
     setToggleStartOrPause(true);
-    const container = document.querySelector(".fullscreen-page");
-  if (container) {
-    container.scrollTo({ top: 0, behavior: "smooth" });
-  }
+    clearInterval(runner);
+    if (telepromptContent.current != null) {
+      telepromptContent.current.scrollTop = 0;
+    }
   };
 
   const navigate = useNavigate();
@@ -242,6 +256,7 @@ function Teleprompter() {
       <input
         className="input-box"
         type="number"
+        max={10}
         name="scroll-speed"
         id="scroll-speed"
         value={selectedScrollSpeed}
@@ -250,7 +265,9 @@ function Teleprompter() {
         }}
       />
       <p>Selected speed: {selectedScrollSpeed}</p>
-      <button onClick={resetSettings}>Reset</button>
+      <Divider></Divider>
+      <br></br>
+      <button className="reset-button" onClick={resetSettings}>Reset Settings</button>
     </Box>
   );
 
@@ -416,24 +433,25 @@ function Teleprompter() {
           </div>
           <script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
 
-          <marquee direction= "up" id="marquee"> {/* Temporary placeholder for scrolling*/}
-          <div className="text-container">
-            <pre
-              style={{
-                fontFamily: selectedFont,
-                fontSize: selectedFontSize,
-                color: selectedTextColor,
-                backgroundColor: selectedBackgroundColor,
-                whiteSpace: "pre-wrap",
-                wordWrap: "break-word",
-              }}
-            >
-              {text}
-            </pre>
+          {/* <marquee direction= "up"> Temporary placeholder for scrolling */}
+          <div 
+            ref={telepromptContent}
+            style={{
+              fontFamily: selectedFont,
+              fontSize: selectedFontSize,
+              color: selectedTextColor,
+              backgroundColor: selectedBackgroundColor,
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+              maxHeight: window.innerHeight,
+              overflowY: "scroll"
+            }}
+            className="text-container">
+            {text}
           </div>
-          </marquee>
+          {/* </marquee> */}
           
-          <div ref={endOfScriptRef} />
+          {/* <div ref={telepromptContent} /> */}
 
           <div className="button-container">
         <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>

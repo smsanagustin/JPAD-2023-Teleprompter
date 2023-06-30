@@ -20,8 +20,8 @@ const App = () => {
       <>
         {console.log("App is running")}
         <Routes>
-          <Route path="/" element={<ShowcaseComponents />} />
-          <Route path="/teleprompter" element={<Teleprompter />} />
+          {/* <Route path="/" element={<ShowcaseComponents />} /> */}
+          <Route path="/" element={<Teleprompter />} />
           <Route exact path="/teleprompter-screen" element={<TeleprompterScreen />}/>
         </Routes>
       </>
