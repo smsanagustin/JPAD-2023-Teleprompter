@@ -445,8 +445,8 @@ function Teleprompter() {
           {/* Slideshow content */}
           {/* Add your slideshow content here */}
           <div className="container" style={{ position: "relative" }}>
-            <img className="icon-button" onClick={toggleTeleprompter} src={BackIcon}></img>
-            {toggleVisiblity ? <img className="icon-button" onClick={hidden} src={OpenEyeIcon}></img>: <img className="icon-button" onClick={visible} src={CloseEyeIcon}></img> }
+            <img className="icon-button1" onClick={toggleTeleprompter} src={BackIcon}></img>
+            {toggleVisiblity ? <img className="icon-button1" onClick={hidden} src={OpenEyeIcon}></img>: <img className="icon-button1" onClick={visible} src={CloseEyeIcon}></img> }
           </div>
           <script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
 
