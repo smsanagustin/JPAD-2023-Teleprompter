@@ -22,12 +22,15 @@ import BackIcon from "../assets/images/BackIcon.png";
 import PlayIcon from "../assets/images/PlayIcon.png";
 import PauseIcon from "../assets/images/PauseIcon.png";
 import StopIcon from "../assets/images/StopIcon.png";
+import OpenEyeIcon from "../assets/images/OpenEye.png";
+import CloseEyeIcon from "../assets/images/ClosedEye.png";
+
 
 
 import React, { useState, useRef } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
-import { Twitter } from "@mui/icons-material";
+import { Close, Twitter } from "@mui/icons-material";
 import ImageTextCard from "../components/ImageTextCard";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../assets/stylesheets/fullscreen-page.css";
@@ -60,10 +63,24 @@ function Teleprompter() {
   const [showTeleprompter, setShowTeleprompter] = useState(false);
 
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
+  const [toggleVisiblity, setVisibility] = useState(true);
 
   // used for scrolling
   const [runner, setRunner] = useState(null);
   const telepromptContent = useRef(null); // initialize ref
+
+  const hidden = () => {
+    setVisibility(false);
+    const icons = document.getElementById('icon-background');
+    icons.style.visibility = 'hidden';
+  }
+
+  const visible = () => {
+    setVisibility(true);
+    const icons = document.getElementById('icon-background');
+    icons.style.visibility = 'visible';
+  }
+
 
   const handlePlay = () => {
     setToggleStartOrPause(false);
@@ -428,7 +445,8 @@ function Teleprompter() {
           {/* Slideshow content */}
           {/* Add your slideshow content here */}
           <div className="container" style={{ position: "relative" }}>
-            <img className="icon-button" style={{ position: "fixed", zIndex: 999 }} onClick={toggleTeleprompter} src={BackIcon}></img>
+            <img className="icon-button" onClick={toggleTeleprompter} src={BackIcon}></img>
+            {toggleVisiblity ? <img className="icon-button" onClick={hidden} src={OpenEyeIcon}></img>: <img className="icon-button" onClick={visible} src={CloseEyeIcon}></img> }
           </div>
           <script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
 
@@ -454,7 +472,7 @@ function Teleprompter() {
 
           <div className="button-container">
         <div className="icon-button-container" style={{backgroundColor: selectedBackgroundColor}}>
-            <div class="icon-background">
+            <div class="icon-background" id="icon-background">
           {toggleStartOrPause ? <img className="icon-button" onClick={handlePlay} src={PlayIcon}></img>: <img className="icon-button" onClick={handlePause} src={PauseIcon}></img> }
           <img className="icon-button" onClick={handleStop} src={StopIcon}></img>
             </div>
