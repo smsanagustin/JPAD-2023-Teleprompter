@@ -54,7 +54,7 @@ function Teleprompter() {
   const [selectedFont, setSelectedFont] = useState("");
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
-  const [selectedFontSize, setSelectedFontSize] = useState(12);
+  const [selectedFontSize, setSelectedFontSize] = useState(70);
   const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(1);
   const [selectedBackgroundColor, setSelectedBackgroundColor] =
     useState("#F5F5F5");
