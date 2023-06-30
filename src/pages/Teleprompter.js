@@ -18,6 +18,11 @@ import Modal from "../components/Modal";
 import DocPage from "../components/DocPage";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
+import BackIcon from "../assets/images/BackIcon.png";
+import PlayIcon from "../assets/images/PlayIcon.png";
+import PauseIcon from "../assets/images/PauseIcon.png";
+import StopIcon from "../assets/images/StopIcon.png";
+
 
 import React, { useState, useRef } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
@@ -423,13 +428,7 @@ function Teleprompter() {
           {/* Slideshow content */}
           {/* Add your slideshow content here */}
           <div className="container" style={{ position: "relative" }}>
-            <button
-              className="sticky-button"
-              style={{ position: "fixed", zIndex: 999 }}
-              onClick={toggleTeleprompter}
-            >
-              Back
-            </button>
+            <img className="icon-button" style={{ position: "fixed", zIndex: 999 }} onClick={toggleTeleprompter} src={BackIcon}></img>
           </div>
           <script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
 
@@ -454,9 +453,12 @@ function Teleprompter() {
           {/* <div ref={telepromptContent} /> */}
 
           <div className="button-container">
-        <div className="sticky-button-container" style={{backgroundColor: selectedBackgroundColor}}>
-          {toggleStartOrPause ? <button className="sticky-button" onClick={handlePlay}>Play</button> : <button className="sticky-button" onClick={handlePause}>Pause</button> }
-          <button className="sticky-button" onClick={handleStop}>Stop</button>
+        <div className="icon-button-container" style={{backgroundColor: selectedBackgroundColor}}>
+            <div class="icon-background">
+          {toggleStartOrPause ? <img className="icon-button" onClick={handlePlay} src={PlayIcon}></img>: <img className="icon-button" onClick={handlePause} src={PauseIcon}></img> }
+          <img className="icon-button" onClick={handleStop} src={StopIcon}></img>
+            </div>
+
         </div>
       </div>
         </div>

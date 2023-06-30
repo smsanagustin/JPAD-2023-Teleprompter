@@ -24,17 +24,35 @@
     width: 100%;
   }
   
-  .sticky-button-container {
+  .icon-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
     position: sticky;
-    bottom: 0;
+    bottom: 5px;
     padding: 10px 0;
-    /* box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.2); */
-  }
-  
-  .sticky-button {
-    margin: 0 10px; /* Adjust the button spacing as needed */
+  }   
+
+  .icon-button {
+    margin: 0 8px; /* Adjust the button spacing as needed */
     z-index: 1;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+  }
+
+  .icon-button:hover {
+    background-color: hsla(0, 0%, 100%, 0.262);
+    border-radius: 20px;
+    padding: auto; 
+  }
+
+  .icon-background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, 0.521);
+    width: 500px;
+    height: 65px;
+    border-radius: 20px;
   }
