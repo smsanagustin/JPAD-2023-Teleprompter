@@ -25,7 +25,7 @@ import TrainTabs from "../components/TrainTabs";
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
@@ -65,15 +65,26 @@ function Teleprompter() {
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
 
 
+  useEffect(() => {
+    console.log(response);
+    if(response.finish_reason == 'stop'){
+      console.log('response.result: ',response.result);
+      setText(text + '\n\n\n\n----- [END OF THE ORIGINAL, START OF THE REVISION] -----\n\n\n' + response.result);
+      setRewriteText('');
+    }
+  }, [response]);
+  
   const handleCreateRewrite = async (input, instruction) => {
     setRewriteText('');
+    console.log({input: input, instruction: instruction});
     await rewrite(input, instruction);
-    setRewriteText(response.message);
   };
 
-  const handleAddRewrite = () => {
-    setText(text + '\n\n\n\n----------\n\n\n\n' + rewriteText);
-    setRewriteText('');
+  // Return the number of words
+  function countWords(str) {
+    let words = str.split(/\s+/);
+    words = words.filter(word => word.length > 0);
+    return words.length;
   }
 
   const handleCloseModal = () => {
@@ -392,6 +403,11 @@ function Teleprompter() {
           title={"Let AI rewrite your text"}
           onClose={handleCloseModal}
         >
+          {(() => {
+            let wordCount = countWords(text);
+            let wordCountThreshold = 100;
+            if (wordCount < wordCountThreshold) return <div>Word count must be greater than {wordCountThreshold}. Your current word count is {wordCount}</div>;
+          })()}
           <Grid>
             {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
               <ImageTextCard
@@ -400,14 +416,14 @@ function Teleprompter() {
               >
                 <TextOverlay
                   title = {option.description}
-                  onClick = {handleCreateRewrite}
+                  onClick = {() => {handleCreateRewrite(text, option.prompt)}}
                 />
               </ImageTextCard>
-              
             ))}
           </Grid>
         </Modal>
       ) : null}
+
 
       {/* {showTeleprompter  ? (
         <div className="fullscreen-page" style={{ backgroundColor: "#FFFFFF" }}>

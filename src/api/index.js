@@ -8,7 +8,7 @@ const PORT = 3001;
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/Teleprompter')
   .then(async () => {
-    console.log("The bluetooth device is connected dah succesfalley");
+    console.log("\n\nThe bluetooth device is connected dah succesfalley");
   })
   .catch((error) => {
     console.error('Failed to connect to MongoDB:', error);

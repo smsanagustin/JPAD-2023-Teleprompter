@@ -9,7 +9,7 @@ const useAI = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer YOUR_API_KEY`,
+          Authorization: `Bearer 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`,
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
@@ -20,7 +20,10 @@ const useAI = () => {
         }),
       });
       const data = await result.json();
-      setResponse(data);
+      const response = {finish_reason: data.choices[0].finish_reason, result: data.choices[0].message.content};
+      console.log(response);
+      setResponse(response);
+      return response;
     } catch (error) {
       console.error(error);
     }

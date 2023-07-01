@@ -10,7 +10,6 @@ const ScriptSchema = mongoose.Schema({
   title: { type: String, required: true},
   text: { type: String, required: true},
   settings: {
-    required: false,
     scrollSpeed: Number,
     fontStyle: Number, /* Key reference to an element in the Font style map */
     fontSize: Number,
