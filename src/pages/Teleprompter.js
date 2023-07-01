@@ -310,7 +310,9 @@ function Teleprompter() {
             >
               Rewrite with AI
             </IconTextButton>,
-            <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
+
+            // <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
+            
             <IconTextButton
               icon="palette"
               onClick={toggleDrawer("right", true)}
