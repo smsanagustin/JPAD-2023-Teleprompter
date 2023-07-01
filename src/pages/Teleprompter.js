@@ -37,7 +37,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Close, Twitter } from "@mui/icons-material";
-import ImageTextCard from "../components/ImageTextCard";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../assets/stylesheets/fullscreen-page.css";
 import { right } from "@popperjs/core";

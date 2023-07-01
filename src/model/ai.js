@@ -9,7 +9,7 @@ const useAI = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer YOUR_API_KEY`,
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
