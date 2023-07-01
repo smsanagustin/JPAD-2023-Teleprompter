@@ -444,11 +444,6 @@ function Teleprompter() {
           title={"Let AI rewrite your text"}
           onClose={handleCloseModal}
         >
-          {(() => {
-            let wordCount = countWords(text);
-            let wordCountThreshold = 100;
-            if (wordCount < wordCountThreshold) return <div>Word count must be greater than {wordCountThreshold}. Your current word count is {wordCount}</div>;
-          })()}
           <Grid>
             {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
               <ImageTextCard
