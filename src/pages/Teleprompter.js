@@ -12,11 +12,16 @@ import useAI from "../model/ai";
 
 import AppIconText from "../components/AppIconText";
 import Center from "../components/Center";
-import TrainTabs from "../components/TrainTabs";
-import SplitContent from "../components/SplitContent";
-import IconTextButton from "../components/IconTextButton";
-import Modal from "../components/Modal";
 import DocPage from "../components/DocPage";
+import Grid from "../components/Grid";
+import IconTextButton from "../components/IconTextButton";
+import ImageTextCard from "../components/ImageTextCard";
+import Modal from "../components/Modal";
+import SplitContent from "../components/SplitContent";
+import TextOverlay from "../components/TextOverlay";
+import TrainTabs from "../components/TrainTabs";
+
+
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 
@@ -24,7 +29,6 @@ import React, { useState, useRef } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Twitter } from "@mui/icons-material";
-import ImageTextCard from "../components/ImageTextCard";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../assets/stylesheets/fullscreen-page.css";
 import { right } from "@popperjs/core";
@@ -61,14 +65,20 @@ function Teleprompter() {
   const [toggleStartOrPause, setToggleStartOrPause] = useState(true);
 
 
-  const handleRewrite = async (input, instruction) => {
+  const handleCreateRewrite = async (input, instruction) => {
     setRewriteText('');
-  
     await rewrite(input, instruction);
-  
     setRewriteText(response.message);
   };
-  
+
+  const handleAddRewrite = () => {
+    setText(text + '\n\n\n\n----------\n\n\n\n' + rewriteText);
+    setRewriteText('');
+  }
+
+  const handleCloseModal = () => {
+    setModal(MODAL.hidden);
+  }
 
   const handlePlay = () => {
     setToggleStartOrPause(false);
@@ -139,8 +149,6 @@ function Teleprompter() {
   const toggleTeleprompter = () => {
     setShowTeleprompter(!showTeleprompter);
   };
-
-
   
 
   const sidebarContent = (anchor) => (
@@ -270,6 +278,8 @@ function Teleprompter() {
 
   const endOfScriptRef = useRef(null);
 
+
+
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page">
@@ -380,18 +390,22 @@ function Teleprompter() {
       {modal == MODAL.writeWithAi ? (
         <Modal
           title={"Let AI rewrite your text"}
-          onClose={() => {
-            setModal(MODAL.hidden);
-          }}
+          onClose={handleCloseModal}
         >
-          {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
-            <ImageTextCard
-              image = {option.title}
-              title = {option.image}
-              subtitle = {option.description}
-              onClick = {handleRewrite}
-            />
-          ))}
+          <Grid>
+            {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
+              <ImageTextCard
+                image = {option.image}
+                title = {option.title}
+              >
+                <TextOverlay
+                  title = {option.description}
+                  onClick = {handleCreateRewrite}
+                />
+              </ImageTextCard>
+              
+            ))}
+          </Grid>
         </Modal>
       ) : null}
 
@@ -456,8 +470,11 @@ function Teleprompter() {
         </div>
       </div>
         </div>
-      )}
+      )
+      }
     </div>
+
+    
   );
 }
 

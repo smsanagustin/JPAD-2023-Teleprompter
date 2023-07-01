@@ -26,11 +26,11 @@
     --page-height-letter: 66rem;
     --page-width-letter: 51rem;
 
-    --max-container-width: 40rem;
-    --mix-container-width: 20rem;
+    --max-container-width: 60rem;
+    --min-container-width: 20rem;
 
     --max-container-height: 60rem;
-    --min-container-height: 40rem;
+    --min-container-height: 20rem;
 }
 
 .rounded-corner{
@@ -45,6 +45,8 @@
     margin-right: calc(1 * var(--SDsize));
 }
 
+
+
 /*  COMPONENT ****************************** [ AppIconText ] ****************************** */
 
 .AppIconText{
@@ -58,6 +60,7 @@
 }
 
 
+
 /*  COMPONENT ****************************** [ Center ] ****************************** */
 
 .Center{
@@ -65,6 +68,7 @@
     align-items: center;
     justify-content: center;
 }
+
 
 
 /*  COMPONENT ****************************** [ DocPage ] ****************************** */
@@ -83,6 +87,18 @@
     height: calc(var(--page-height-letter) - var(--page-margin) * 2);;   /*  THIS IS THE SIZE OF 11 inches*/
 
     font-size: 1rem; /* 1 rem is used here because SDsize is only for spacing, positioning and shape sizing*/
+}
+
+
+
+/*  COMPONENT ****************************** [ Grid ] ****************************** */
+
+.Grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+
+    grid-auto-rows: auto;
+    gap: var(--SDsize); 
 }
 
 
@@ -135,10 +151,44 @@
     padding: calc(1 * var(--SDsize));
     border-radius: calc(1 * var(--SDsize));
     min-width: calc(5 * var(--SDsize));
-    min-height: calc(5 * var(--SDsize));
+    min-height: calc(10 * var(--SDsize));
 
+    cursor: pointer;
     overflow: hidden;
 }
+
+.ImageTextCard .title{
+    position: absolute;
+    font-weight: 700;
+}
+
+.ImageTextCard > img{
+    position: absolute;
+    --img-horizontal-pad: calc(3 * var(--SDsize));
+
+    top: calc(2.5 * var(--SDsize));
+    left: var(--img-horizontal-pad);
+
+    height: calc(100%);
+    width: calc(100% + -2 * var(--img-horizontal-pad));;
+
+    transition-property: top, left, width, height;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ImageTextCard:hover > img{
+    --enlarge-add: calc(3 * var(--SDsize));
+
+    position: absolute;
+
+    top: calc(2.5 * var(--SDsize) - var(--enlarge-add));
+    left: calc(var(--img-horizontal-pad) - var(--enlarge-add));
+
+    height: calc(100% + 2 * var(--enlarge-add));
+    width: calc(100% + -2 * var(--img-horizontal-pad) + 2 * var(--enlarge-add));
+}
+
 
 
 /*  COMPONENT ****************************** [ Modal ] ****************************** */
@@ -158,16 +208,21 @@
 
 .Modal .large-container{
     position: relative;
-    max-width: var(--max-container-width);
-    max-height: 75vh;
-    border-radius: calc(1 * var(--SDsize));
     display: flex;
     flex-direction: column;
+
+    width: 60rem;
+    max-width: min(var(--max-container-width), 60vw);
+    min-width: var(--min-container-width);
+    max-height: 75vh;
+
+    border-radius: calc(1 * var(--SDsize));
+    padding: calc(3 * var(--SDsize));
+    gap: calc(2 * var(--SDsize));
 }
 
 .Modal .large-container .body{
     overflow-y: scroll;
-    flex: 1;
 }
 
 
@@ -175,6 +230,9 @@
 .Modal .header .left{
     display: flex;
     align-items: center;
+
+    font-weight: 700;
+    font-size: x-large;
 }
 
 

@@ -31,12 +31,13 @@ body, input, textarea{
     
     /*  Global variable stylings */
     --SDsize: 1rem;
-    --accent-color: hsl(253, 86%, 53%);
+    --accent-color: #4d21ed;
     --accent-color-1: hsl(253, 86%, 66%);
     --accent-color-3: hsl(253, 80%, 97%);
 
     /*  Colors with opacity*/
     --accent-color-opaque-50: hsl(253, 86%, 53%, 0.5);
+    --accent-color-opaque-05: hsl(253, 86%, 53%, 0.05);
 
     --gray0: hsl(0, 0%, 98%);
     --gray1: hsl(0, 0%, 95%);
@@ -115,13 +116,21 @@ body, input, textarea{
     background-color: hsla(0, 0%, 100%, 0.5);
 }
 
-.opque-highlight-50{
+.opque-accent-50{
     background-color: var(--accent-color-opaque-50);
+}
+
+.opque-accent-05{
+    background-color: var(--accent-color-opaque-05);
 }
 
 
 
-
+.hover-gray{
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
 
 .hover-gray:hover{
     background-color: var(--gray2);
@@ -129,6 +138,12 @@ body, input, textarea{
 
 .hover-background-highlight-light:hover{
     background-color: var(--accent-color-3);
+}
+
+.hover-content-highlight{
+    transition-property: color;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .hover-content-highlight:hover{

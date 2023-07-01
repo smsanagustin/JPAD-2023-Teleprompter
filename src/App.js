@@ -10,7 +10,7 @@ import TeleprompterScreen from './pages/TeleprompterScreen';
 
 
 //  comment this line below to remove the boders around divs
-import './assets/stylesheets/wireframe.css'
+// import './assets/stylesheets/wireframe.css'
 // import './assets/stylesheets/bounds.css'
 
 
