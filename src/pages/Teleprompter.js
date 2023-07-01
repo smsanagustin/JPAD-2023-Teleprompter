@@ -8,14 +8,20 @@ import {
   COLORS,
   AI_REWRITE_OPTIONS,
 } from "../model/values";
+import useAI from "../model/ai";
 
 import AppIconText from "../components/AppIconText";
 import Center from "../components/Center";
-import TrainTabs from "../components/TrainTabs";
-import SplitContent from "../components/SplitContent";
-import IconTextButton from "../components/IconTextButton";
-import Modal from "../components/Modal";
 import DocPage from "../components/DocPage";
+import Grid from "../components/Grid";
+import IconTextButton from "../components/IconTextButton";
+import ImageTextCard from "../components/ImageTextCard";
+import Modal from "../components/Modal";
+import SplitContent from "../components/SplitContent";
+import TextOverlay from "../components/TextOverlay";
+import TrainTabs from "../components/TrainTabs";
+
+
 import TeleprompterPageContent from "../components/TeleprompterPageContent.js";
 import TeleprompterRibbon from "../components/TeleprompterRibbon";
 import BackIcon from "../assets/images/BackIcon.png";
@@ -27,7 +33,7 @@ import CloseEyeIcon from "../assets/images/ClosedEye.png";
 
 
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Drawer, Divider, Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Close, Twitter } from "@mui/icons-material";
@@ -45,6 +51,9 @@ function Teleprompter() {
 
   //  ******************** [ DATA STATES ] ********************
   const [text, setText] = useState("");
+  const [response, rewrite] = useAI();
+  const [rewriteText, setRewriteText] = useState("");
+
   const [selectedMode, setSelectedMode] = useState(MODES.defaultval);
   const [position, setPosition] = useState(0);
 
@@ -81,6 +90,33 @@ function Teleprompter() {
     icons.style.visibility = 'visible';
   }
 
+
+
+  useEffect(() => {
+    console.log(response);
+    if(response.finish_reason == 'stop'){
+      console.log('response.result: ',response.result);
+      setText(text + '\n\n\n\n----- [END OF THE ORIGINAL, START OF THE REVISION] -----\n\n\n' + response.result);
+      setRewriteText('');
+    }
+  }, [response]);
+  
+  const handleCreateRewrite = async (input, instruction) => {
+    setRewriteText('');
+    console.log({input: input, instruction: instruction});
+    await rewrite(input, instruction);
+  };
+
+  // Return the number of words
+  function countWords(str) {
+    let words = str.split(/\s+/);
+    words = words.filter(word => word.length > 0);
+    return words.length;
+  }
+
+  const handleCloseModal = () => {
+    setModal(MODAL.hidden);
+  }
 
   const handlePlay = () => {
     setToggleStartOrPause(false);
@@ -161,8 +197,6 @@ function Teleprompter() {
   const toggleTeleprompter = () => {
     setShowTeleprompter(!showTeleprompter);
   };
-
-
   
 
   const sidebarContent = (anchor) => (
@@ -295,6 +329,8 @@ function Teleprompter() {
 
   const endOfScriptRef = useRef(null);
 
+
+
   //  edit to add functionalities
   return (
     <div className="Teleprompter-Page">
@@ -305,16 +341,18 @@ function Teleprompter() {
         <SplitContent
           left={[<AppIconText />]} // insert the array of components
           right={[
-            // <IconTextButton
-            //   icon="magic_button"
-            //   onClick={() => {
-            //     setModal(MODAL.writeWithAi);
-            //   }}
-            //   className="margin-right-1 highlight-2 hover-highlight-2"
-            // >
-            //   Rewrite with AI
-            // </IconTextButton>,
+            <IconTextButton
+              icon="magic_button"
+              onClick={() => {
+                setModal(MODAL.writeWithAi);
+              }}
+              className="margin-right-1 highlight-2 hover-highlight-2"
+            >
+              Rewrite with AI
+            </IconTextButton>,
+
             // <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
+            
             <IconTextButton
               icon="palette"
               onClick={toggleDrawer("right", true)}
@@ -405,19 +443,29 @@ function Teleprompter() {
       {modal == MODAL.writeWithAi ? (
         <Modal
           title={"Let AI rewrite your text"}
-          onClose={() => {
-            setModal(MODAL.hidden);
-          }}
+          onClose={handleCloseModal}
         >
-          {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
-            <ImageTextCard
-              image={option.title}
-              title={option.image}
-              description={option.description}
-            />
-          ))}
+          {(() => {
+            let wordCount = countWords(text);
+            let wordCountThreshold = 100;
+            if (wordCount < wordCountThreshold) return <div>Word count must be greater than {wordCountThreshold}. Your current word count is {wordCount}</div>;
+          })()}
+          <Grid>
+            {Object.entries(AI_REWRITE_OPTIONS).map(([key, option]) => (
+              <ImageTextCard
+                image = {option.image}
+                title = {option.title}
+              >
+                <TextOverlay
+                  title = {option.description}
+                  onClick = {() => {handleCreateRewrite(text, option.prompt)}}
+                />
+              </ImageTextCard>
+            ))}
+          </Grid>
         </Modal>
       ) : null}
+
 
       {/* {showTeleprompter  ? (
         <div className="fullscreen-page" style={{ backgroundColor: "#FFFFFF" }}>
@@ -480,8 +528,11 @@ function Teleprompter() {
         </div>
       </div>
         </div>
-      )}
+      )
+      }
     </div>
+
+    
   );
 }
 
