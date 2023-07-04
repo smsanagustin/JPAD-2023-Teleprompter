@@ -15,5 +15,5 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ### To visit the app online, go to:
-https://jpad-2023-teleprompter.vercel.app/
-The Write with AI feature is currently disabled in the link above. If you want to test the AI feature, you can clone the code in this repository and replace the `API KEY` with your private openAI key which can be found [here](https://platform.openai.com/account/api-keys), then run the app using `npm start`. Thank you!
+https://jpad-2023-teleprompter.vercel.app/ \
+The Write with AI feature is currently disabled in the link above. If you want to test the AI feature, you can clone the code in this repository and replace the `API KEY` with your private openAI key (which can be found [here](https://platform.openai.com/account/api-keys)) then run the app using `npm start`. Thank you!
