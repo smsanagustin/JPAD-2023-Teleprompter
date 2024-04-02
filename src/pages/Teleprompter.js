@@ -62,7 +62,7 @@ function Teleprompter() {
   const [selectedFont, setSelectedFont] = useState("");
   //   const [selectedTextColor, setSelectedTextColor] = useState(COLORS.defaultval);
   const [selectedTextColor, setSelectedTextColor] = useState("#000000");
-  const [selectedFontSize, setSelectedFontSize] = useState(70);
+  const [selectedFontSize, setSelectedFontSize] = useState(120);
   const [selectedScrollSpeed, setSelectedScrollSpeed] = useState(1);
   const [selectedBackgroundColor, setSelectedBackgroundColor] =
     useState("#F5F5F5");
@@ -340,15 +340,15 @@ function Teleprompter() {
         <SplitContent
           left={[<AppIconText />]} // insert the array of components
           right={[
-            <IconTextButton
-              icon="magic_button"
-              onClick={() => {
-                setModal(MODAL.writeWithAi);
-              }}
-              className="margin-right-1 highlight-2 hover-highlight-2"
-            >
-              Rewrite with AI
-            </IconTextButton>,
+            // <IconTextButton
+            //   icon="magic_button"
+            //   onClick={() => {
+            //     setModal(MODAL.writeWithAi);
+            //   }}
+            //   className="margin-right-1 highlight-2 hover-highlight-2"
+            // >
+            //   Rewrite with AI
+            // </IconTextButton>,
 
             // <IconTextButton icon="save" onClick={() => {}}></IconTextButton>,
             
